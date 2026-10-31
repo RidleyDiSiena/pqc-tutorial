@@ -669,7 +669,7 @@ body[data-site]:not(.dockrow):not(.rail) .deck{grid-template-columns:repeat(3,mi
 
 <div class="wrap">
 <script>window.__SITE = {"site": "all", "title": "PQC Wonderland", "label": "", "urls": {}}; document.body.dataset.site = "all";</script>
-<script>(function(){ var astro = true; try { astro = !!window.__SITE || localStorage.getItem('rabbit-hole-skin') !== 'wonder'; } catch (e) {} if (astro) document.body.classList.add('astro');
+<script>(function(){ var astro = true; try { astro = localStorage.getItem('rabbit-hole-skin') !== 'wonder'; } catch (e) {} if (astro) document.body.classList.add('astro');
   try { var t = localStorage.getItem('rabbit-hole-theme'); if (t === 'light') t = 'paper'; if (t === 'dark') t = 'terminal'; if (/^(terminal|nebula|phosphor|glacier|paper|dawn)$/.test(t || '')){ document.body.dataset.theme = t; if (t === 'paper' || t === 'dawn') document.body.classList.add('light'); } } catch (e) {}
   setTimeout(function(){ document.body.classList.add('astro-ready'); }, 2500); })();</script>
 <header>
@@ -4411,11 +4411,9 @@ function themeSet(name){ if (name === 'light' || name === true) name = THEME.lig
   themeSync(); requestAnimationFrame(rwRedraw); }
 if ($('theme-btn')) $('theme-btn').addEventListener('click', () => themeSet(THEMES[THEME.pick] === 'light' ? THEME.dark : THEME.light));
 document.querySelectorAll('.vp-th').forEach(b => b.addEventListener('click', () => themeSet(b.dataset.theme))); themeSync();
-// a site build: the brand names the page, the gear's 'More demos' is not needed (the deck has the three pages) and the Look row
-// points at the legacy page, which keeps the Wonderland skin
-if (SITE){ const s = $('db-site'); if (s) s.textContent = SITE.label || ''; const more = document.querySelector('.vp-more'); if (more) more.hidden = true;
-  const skin = document.querySelector('.vp-skin'), row = skin && skin.closest('.vp-row');
-  if (row) row.innerHTML = `<span class="lbl">Look</span><span class="vp-link">This page is PQC Wonderland, the space look. The original, with the Wonderland lore and the neon: <a href="${escHtml(SITE.urls.legacy || '#')}">Down the Rabbit Hole ↗</a></span>`; }
+// a site build: the brand names the page and the gear's 'More demos' is not needed (the deck has the three pages);
+// the Look row keeps both skin buttons
+if (SITE){ const s = $('db-site'); if (s) s.textContent = SITE.label || ''; const more = document.querySelector('.vp-more'); if (more) more.hidden = true; }
 VIEW.ready = true;
 // views:end
 window.addEventListener('hashchange', () => showTab(location.hash.slice(1), false));
@@ -4475,5 +4473,5 @@ new MutationObserver(() => { skinSyncLevel(); if (SKIN.on && SKIN.dict) skinAppl
 $('skin-switch').addEventListener('click', () => skinSet(!document.body.classList.contains('astro')));
 window.__rabbitHole.skin = { set: skinSet, get: () => SKIN.on, level: skinLevel, refresh: () => { if (SKIN.on) skinApply(); }, ready: () => SKIN.ready };
 let skin0 = 'astro'; try { skin0 = localStorage.getItem(SKIN_KEY) || skin0; } catch (e) {}
-skinSet(!!window.__SITE || skin0 === 'astro', false);
+skinSet(skin0 === 'astro', false);
 </script>
