@@ -2,6 +2,8 @@
 
 A post-quantum cryptography tutorial and classroom that runs entirely in the browser.
 
+**Try it live: https://ridleydisiena.github.io/pqc-tutorial/**
+
 - **The Tutorial:** eight scenes, each running a real algorithm: ML-KEM (FIPS 203), ML-DSA (FIPS 204), SLH-DSA (FIPS 205),
   Falcon (the FIPS 206 draft), HQC-KEM (the FIPS 207 to come), the X-Wing and QSF hybrids, KEM-based authentication, and the
   sizes of all of them side by side.
