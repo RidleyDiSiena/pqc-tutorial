@@ -10,6 +10,9 @@ A post-quantum cryptography tutorial and classroom that runs entirely in the bro
 - **The Classroom:** thirteen lessons on the mathematics underneath (lattices, LWE, the NTT, the Fujisaki–Okamoto transform,
   rejection sampling, hash-based signatures, Merkle trees, Falcon's trapdoor, security levels, codes and HQC, and Q-day),
   in four depths, with animated demos and an exam.
+- **The Reference:** a searchable, cross-linked glossary of every term the Tutorial and the Classroom use, and a card for
+  each algorithm (FIPS 203 to 207, SP 800-208, X-Wing, FrodoKEM, Classic McEliece) explaining what it is, the mathematics
+  under it, its sizes, and the official references. Any entry can be linked, for example `#glossary/lwe`.
 
 It is a static site: `index.html`, `credits.html` and `vendor/`. There is no server code, no build step and no analytics, and
 the page loads nothing from any other site.

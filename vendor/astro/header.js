@@ -4,9 +4,9 @@ export default {
   global: {
     static: {
       'header > p': {
-        b: 'Three sections: the post-quantum algorithms run live in your browser, the mathematics under them in thirteen lessons, and TLS 1.3 handshakes with post-quantum key exchange. Nothing leaves the page.',
-        a: 'Three sections: the FIPS 203, 204 and 205 algorithms, Falcon (the FIPS 206 draft), HQC and the X-Wing hybrid running in your browser; thirteen lessons on the mathematics under them and on Q-day; and TLS 1.3 handshakes with classical, hybrid and pure post-quantum key exchange. Nothing is sent anywhere.',
-        x: 'Three sections: ML-KEM, ML-DSA and SLH-DSA (FIPS 203, 204, 205), FN-DSA (the FIPS 206 draft), HQC (FIPS 207, to come) and X-Wing, each run on real parameter sets with every byte shown; thirteen lessons on lattices, LWE, the NTT, hash-based signatures, codes and the Q-day resource estimates, checked against the real algorithms; and RFC 8446 handshakes with X25519MLKEM768 (RFC 10024), the pure ML-KEM groups (draft) and classical groups side by side. Nothing is sent anywhere.',
+        b: 'Three sections: the post-quantum algorithms run live in your browser, the mathematics under them in thirteen lessons, and a reference shelf: a glossary of every term and a card for each algorithm. Nothing leaves the page.',
+        a: 'Three sections: the FIPS 203, 204 and 205 algorithms, Falcon (the FIPS 206 draft), HQC and the X-Wing hybrid running in your browser; thirteen lessons on the mathematics under them and on Q-day; and a reference shelf, with a glossary of every term and a card per algorithm on its mathematics and its standards. Nothing is sent anywhere.',
+        x: 'Three sections: ML-KEM, ML-DSA and SLH-DSA (FIPS 203, 204, 205), FN-DSA (the FIPS 206 draft), HQC (FIPS 207, to come) and X-Wing, each run on real parameter sets with every byte shown; thirteen lessons on lattices, LWE, the NTT, hash-based signatures, codes and the Q-day resource estimates, checked against the real algorithms; and a reference shelf: a cross-linked glossary of every term the page uses, and a card per algorithm (FIPS 203 to 207, SP 800-208, X-Wing, FrodoKEM, Classic McEliece) with its mathematics, sizes and official references. Nothing is sent anywhere.',
       },
       '#sec-tutorial .sec-blurb .fun': 'Algorithms',
       '#sec-tutorial .sec-blurb p': {

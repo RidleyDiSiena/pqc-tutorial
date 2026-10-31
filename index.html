@@ -335,6 +335,49 @@ table.levels td.safe{color:var(--green)} table.levels td.exposed{color:var(--hot
 .tree .node.cons text,.tree .node.old text{fill:var(--ink)}
 .actor .glyph .fade{transition:opacity 1.4s} .actor.vanish .glyph .fade{opacity:0}
 .who.gryphon{color:var(--violet)}
+/* links that leave the page: an arrow, and words for screen readers */
+a[href^="http"]::after{content:"\00a0↗";content:"\00a0↗" / " (opens in a new tab)";font-size:.8em;text-decoration:none;display:inline-block}
+/* the reference shelf */
+.tabs.reference{grid-template-columns:repeat(2,minmax(0,1fr))}
+body.astro .deck-btn[data-sec="reference"]{--c:var(--sec-gl) !important} body.astro[data-sec="reference"]{--sec:var(--sec-gl);--sec-2:var(--sec-gl2)}
+.gl-tools{position:sticky;top:0;z-index:2;background:var(--ground);padding:8px 0 6px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;border-bottom:1px solid var(--line)}
+.gl-tools .gl-count{margin:0}
+.gl-nav{margin:6px 0 4px}
+#gl-q{width:100%;max-width:520px;font:inherit;font-size:16px;padding:9px 12px;border-radius:12px;border:2px solid var(--line);background:var(--panel);color:var(--ink)}
+#gl-q:focus{outline:2px solid var(--sec-2);outline-offset:2px}
+.gl-cats{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 6px}
+.gl-chip{font:inherit;font-size:13px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer}
+.gl-chip[aria-pressed="true"]{border-color:var(--sec-2);color:var(--ink);box-shadow:inset 0 0 0 1px var(--sec-2)}
+.gl-az{display:flex;flex-wrap:wrap;gap:2px}
+.gl-l{font:600 13px "Share Tech Mono",monospace;min-width:26px;padding:4px 0;border:0;border-radius:6px;background:none;color:var(--sec-2);cursor:pointer}
+.gl-l:hover{background:var(--panel)} .gl-l:disabled{color:var(--line);cursor:default}
+.gl-count{color:var(--muted);font-size:13px;margin:6px 0 0}
+.gl-letter{font-size:26px;color:var(--sec-2);margin:22px 0 6px;border-bottom:1px solid var(--line);scroll-margin-top:80px}
+.gl-entry,.alg-card{background:color-mix(in srgb,var(--panel) 88%,transparent);border:1px solid var(--line);border-radius:16px;padding:12px 16px;margin:10px 0;scroll-margin-top:80px;max-width:78ch}
+.alg-card{scroll-margin-top:12px}
+@media (max-width:560px){.gl-entry,.gl-letter{scroll-margin-top:112px}}
+.gl-entry h4{margin:0 0 4px;font-size:18px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.gl-self{color:var(--ink);text-decoration:none} .gl-self:hover{text-decoration:underline}
+.gl-cat{font:400 11px "Share Tech Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gl-aka{font-size:13px;color:var(--muted);margin:0 0 6px}
+.gl-def,.gl-more,.alg-card p{margin:6px 0;line-height:1.55}
+.gl-more{color:var(--muted)}
+.gl-row{font-size:14px;color:var(--muted);margin:6px 0} .gl-row b{color:var(--ink);font-weight:600}
+.gl-link{color:inherit;text-decoration:underline dotted;text-decoration-color:var(--sec-2);text-underline-offset:3px}
+.gl-link:hover{color:var(--sec-2)}
+.gl-entry.flash,.alg-card.flash{animation:glflash 1.6s ease-out}
+@keyframes glflash{0%{box-shadow:0 0 0 3px var(--sec-2)}100%{box-shadow:0 0 0 0 transparent}}
+.gl-entry:focus,.alg-card:focus{outline:none}
+.alg-table-wrap{overflow-x:auto;margin:10px 0 4px}
+.alg-table{border-collapse:collapse;font-size:14px;min-width:520px}
+.alg-table th,.alg-table td{text-align:left;padding:6px 12px 6px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.alg-table th{color:var(--muted);font-weight:600}
+.alg-card h3{margin:0 0 6px;font-size:22px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.alg-card h4{margin:12px 0 2px;font-size:14px;color:var(--sec-2);letter-spacing:.04em}
+.alg-std,.alg-status{font:400 12px "Share Tech Mono",monospace;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.alg-sizes{font-family:"Share Tech Mono",monospace;font-size:14px}
+.alg-refs{margin:4px 0;padding-left:18px} .alg-refs li{margin:3px 0}
+@media (prefers-reduced-motion:reduce){.gl-entry.flash,.alg-card.flash{animation:none;outline:2px solid var(--sec-2)}}
 /* sizes wall */
 .wall{display:grid;gap:14px;margin-top:18px}
 .wall .sizes{margin-top:0}
@@ -678,7 +721,7 @@ body[data-site]:not(.dockrow):not(.rail) .deck{grid-template-columns:repeat(3,mi
       <span class="h1-astro"><svg class="worm" viewBox="0 0 1404 100" role="img" aria-label="PQC Wonderland" preserveAspectRatio="xMinYMid meet"><g fill="none" stroke="currentColor" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"><path transform="translate(0 0)" d="M11 89V11h31a22 22 0 0 1 0 44H11"/><path transform="translate(90 0)" d="M50 11a39 39 0 1 0 .1 0M60 60l26 26"/><path transform="translate(206 0)" d="M86 23A39 39 0 1 0 86 77"/><path transform="translate(368 0)" d="M11 11v56a22 22 0 0 0 44 0V37M55 37v30a22 22 0 0 0 44 0V11"/><path transform="translate(496 0)" d="M50 11a39 39 0 1 0 .1 0"/><path transform="translate(612 0)" d="M11 89V11h22a22 22 0 0 1 22 22v56"/><path transform="translate(706 0)" d="M11 89V11h25a39 39 0 0 1 0 78H11"/><path transform="translate(808 0)" d="M73 11H33a22 22 0 0 0-22 22v34a22 22 0 0 0 22 22h40M11 50h54"/><path transform="translate(908 0)" d="M11 89V11h31a22 22 0 0 1 0 44H11M44 55l31 34"/><path transform="translate(1010 0)" d="M11 11v56a22 22 0 0 0 22 22h40"/><path transform="translate(1108 0)" d="M11 89V50a39 39 0 0 1 78 0v39"/><path transform="translate(1224 0)" d="M11 89V11h22a22 22 0 0 1 22 22v56"/><path transform="translate(1318 0)" d="M11 89V11h25a39 39 0 0 1 0 78H11"/></g></svg></span>
     </h1>
   </div>
-  <p>Three doors at the bottom of the hole: the algorithms, the mathematics under them, and the glass TLS will have to pass through.</p>
+  <p>Three doors at the bottom of the hole: the algorithms, the mathematics under them, and a reference shelf for every word and standard.</p>
   <div class="skinbar" id="skinbar">
     <div class="skinlevel" id="skin-level" role="group" aria-label="Depth"><span class="lbl">Depth</span><button type="button" data-level="b" aria-pressed="false">Simple</button><button type="button" data-level="a" aria-pressed="true">Advanced</button><button type="button" data-level="x" aria-pressed="false">Expert</button></div>
     <button class="skin-switch" id="skin-switch" type="button" role="switch" aria-checked="false" aria-label="Wonderland skin" title="Astronaut: PQC Wonderland, plain and light. Rabbit: Down the Rabbit Hole, the Wonderland version."><svg class="ico astro" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="8" y="6.5" width="8" height="4.5" rx="2" fill="currentColor"/><path d="M4 22c0-4.4 3.6-7 8-7s8 2.6 8 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="knob"></span><svg class="ico rabbit" viewBox="0 0 64 40" aria-hidden="true"><g fill="currentColor"><ellipse cx="24" cy="27" rx="19" ry="11"/><circle cx="7" cy="30" r="4.5"/><circle cx="46" cy="24" r="10"/><path d="M40 16 30 3q-3-2-3 2l5 14z"/><path d="M46 15 40 1q-2-3-3 1l3 15z"/></g><circle cx="50" cy="22" r="1.8" fill="var(--panel-2)"/></svg></button>
@@ -690,6 +733,7 @@ body[data-site]:not(.dockrow):not(.rail) .deck{grid-template-columns:repeat(3,mi
 <nav class="deck" role="tablist" aria-label="Sections">
   <button class="deck-btn" role="tab" data-sec="tutorial" aria-selected="true" style="--c:var(--cyan)"><span class="t">PQC Algorithm Tutorial</span><span class="s">FIPS 203–207 · X-Wing</span></button>
   <button class="deck-btn" role="tab" data-sec="classroom" aria-selected="false" style="--c:var(--green)"><span class="t">PQC Classroom</span><span class="s">thirteen lessons &amp; the exam</span></button>
+  <button class="deck-btn" role="tab" data-sec="reference" aria-selected="false" style="--c:var(--violet)"><span class="t">Reference</span><span class="s">glossary &amp; the standards</span></button>
 </nav>
 
 <div class="secframe">
@@ -724,6 +768,13 @@ body[data-site]:not(.dockrow):not(.rail) .deck{grid-template-columns:repeat(3,mi
       <button class="tab-btn" role="tab" data-lesson="rw-l12"><span class="std">Lesson 12</span><span class="fun">HQC</span></button>
       <button class="tab-btn" role="tab" data-lesson="rw-l13"><span class="std">Lesson 13</span><span class="fun">Q-day</span></button>
       <button class="tab-btn exam" role="tab" data-lesson="rw-lx"><span class="std">Final</span><span class="fun">The exam</span></button>
+    </nav>
+  </div>
+  <div class="sec" id="sec-reference" hidden>
+    <div class="sec-blurb"><span class="fun">The reference shelf</span><p>Every term the Tutorial and the Classroom use, with its meaning, and a card for each algorithm: what it is, the mathematics under it, and where to read more. Terms link to each other; links that leave the page open in a new tab (↗).</p></div>
+    <nav class="tabs reference" role="tablist" aria-label="Reference">
+      <button class="tab-btn" role="tab" data-tab="glossary" aria-selected="false" aria-controls="tab-glossary"><span class="std">Every term, A to Z</span><span class="fun">Glossary</span></button>
+      <button class="tab-btn" role="tab" data-tab="algorithms" aria-selected="false" aria-controls="tab-algorithms"><span class="std">Each one and its maths</span><span class="fun">Algorithms</span></button>
     </nav>
   </div>
 </div>
@@ -1792,6 +1843,26 @@ Lattices, hashes, codes: no Shor.  Best known quantum sieving 2^0.257d against c
     <section class="sizes"><h3>Signatures and ciphertexts</h3><p class="legend"><span><i style="background:var(--violet)"></i>classical</span><span><i style="background:var(--tangerine)"></i>ML-KEM ct</span><span><i style="background:var(--cyan)"></i>ML-DSA sig</span><span><i style="background:var(--lime)"></i>SLH-DSA sig</span><span><i style="background:var(--magenta)"></i>FN-DSA draft</span><span><i style="background:var(--rose)"></i>HQC-KEM ct (FIPS 207 to come)</span><span><i style="background:var(--green)"></i>FrodoKEM ct</span><span><i style="background:var(--blue)"></i>Classic McEliece ct</span></p><div class="bars" id="sw-sig"></div></section>
   </div>
   <p class="foot">Classical sizes are raw encodings: an RSA modulus (an RSA-2048 SPKI DER is 294 B), uncompressed NIST points (0x04 ‖ x ‖ y), raw Montgomery and Edwards keys (RFC 7748, RFC 8032); every RSA size, curve and Edwards key TLS 1.3 uses is here. FN-DSA sizes are from the Falcon submission (padded signature lengths) and will be confirmed against FIPS 206 when it is final. HQC-KEM sizes are the round 4 specification's (22 August 2025, Table 6); FIPS 207 has no draft yet, and the Pool of Tears says what is known of it. FrodoKEM sizes are its standard mode, which adds a salt to the ciphertext (the ephemeral eFrodoKEM's ciphertexts are 32, 48 or 64 B shorter), as in draft-chen-lamps-cms-frodokem-01. Classic McEliece sizes are from its specification's formulas (public key mt·⌈k/8⌉, ciphertext ⌈mt/8⌉), without plaintext confirmation; the “pc” variants add 32 B to the ciphertext. Both are in ISO/IEC 18033-2 Amendment 2.</p>
+</section>
+
+<!-- ============================ THE REFERENCE SHELF ============================ -->
+<section class="tab ref" id="tab-glossary" role="tabpanel" hidden>
+  <h2>Glossary</h2>
+  <p class="lede">Every term the Tutorial and the Classroom use, in plain words first. Search, pick a topic, or jump to a letter. Underlined terms inside a definition open their own entry; your browser’s Back button returns you.</p>
+  <div class="gl-tools">
+    <input type="search" id="gl-q" placeholder="Search the glossary" aria-label="Search the glossary" autocomplete="off">
+    <p class="gl-count" id="gl-count" aria-live="polite">Loading the glossary…</p>
+  </div>
+  <div class="gl-nav">
+    <div class="gl-cats" id="gl-cats" role="group" aria-label="Topic"></div>
+    <nav class="gl-az" id="gl-az" aria-label="Jump to a letter"></nav>
+  </div>
+  <div class="gl-list" id="gl-list"></div>
+</section>
+<section class="tab ref" id="tab-algorithms" role="tabpanel" hidden>
+  <h2>Algorithms</h2>
+  <p class="lede">One card for each algorithm the page covers: what it is for, the mathematics it rests on (each term links to the glossary), its sizes, where to try it here, and the official references.</p>
+  <div id="alg-body"><p class="gl-count">Loading the cards…</p></div>
 </section>
 
 <p class="foot credit">Created by <strong>Ridley DiSiena</strong> · <a href="https://github.com/RidleyDiSiena">github.com/RidleyDiSiena</a> · <a href="https://ridleydisiena.github.io/spaced-research-ledger/">Spaced Research Ledger</a> · <a href="credits.html">Credits &amp; sources</a></p>
@@ -4250,7 +4321,7 @@ hqDriver.setOnError(e => hq.error('Something went wrong in the pool: ' + e.messa
 // Four sections on the deck; each owns its tabs. The classroom's second rail picks a lesson instead of a tab.
 // The hash stays the tab's name (#teaparty, #drinkme); a lesson rides after a slash (#reeling/3, #reeling/exam), and the
 // classroom's mode before it (#reeling/simple/3; the old word beginner still works); a link without a mode keeps the viewer's, and the hash written back carries it.
-const SECTIONS = { tutorial: ['sizes','drinkme','whoareyou','tumtum','pocketwatch','pooloftears','bothpills','teaparty'], classroom: ['reeling'] };
+const SECTIONS = { tutorial: ['sizes','drinkme','whoareyou','tumtum','pocketwatch','pooloftears','bothpills','teaparty'], classroom: ['reeling'], reference: ['glossary','algorithms'] };
 const TABS = Object.values(SECTIONS).flat();
 const LESSONS = [...document.querySelectorAll('#tab-reeling details.lesson')].map(d => d.id);
 const lastIn = Object.fromEntries(Object.entries(SECTIONS).map(([k, v]) => [k, v[0]]));
@@ -4282,7 +4353,9 @@ function showTab(hash, push=true){
   TABS.forEach(t => { $('tab-' + t).hidden = t !== name; });
   document.body.dataset.tab = name;
   if (name === 'reeling') showLesson(sub ? (sub === 'exam' ? 'rw-lx' : 'rw-l' + sub) : lesson);
-  const h = name === 'reeling' ? `reeling/${RW_MODES[rw.mode]}/${lessonKey(lesson)}` : name;
+  const refSub = (name === 'glossary' || name === 'algorithms') && sub && /^[a-z0-9-]+$/.test(sub) ? sub : '';
+  if (name === 'glossary' || name === 'algorithms') refShow(name, refSub);
+  const h = name === 'reeling' ? `reeling/${RW_MODES[rw.mode]}/${lessonKey(lesson)}` : refSub ? `${name}/${refSub}` : name;
   if (push && location.hash !== '#' + h) history.replaceState(null, '', '#' + h);
   try { localStorage.setItem('rabbit-hole-tab', h); } catch (e) {}
   viewSync();
@@ -4302,7 +4375,7 @@ const VIEWS = ['dock', 'rail', 'cards', 'hud', 'classic'], VIEW_KEY = 'rabbit-ho
 const SITE = window.__SITE || null;
 const VIEW = { pick: 'rail', fit: true, ready: false, card: 0, cards: [], host: null, raf: 0 };   // Console is the default (Ridley, 2026-10-24)
 try { const v = localStorage.getItem(VIEW_KEY); if (VIEWS.includes(v)) VIEW.pick = v; VIEW.fit = localStorage.getItem(FIT_KEY) !== 'off'; } catch (e) {}
-const viewEff = () => ['tutorial', 'classroom', 'glass'].includes(document.body.dataset.sec) && !document.body.classList.contains('matrix') ? VIEW.pick : 'classic';
+const viewEff = () => ['tutorial', 'classroom', 'reference'].includes(document.body.dataset.sec) && !document.body.classList.contains('matrix') ? VIEW.pick : 'classic';
 const viewSpread = v => v !== 'classic' && innerWidth >= (v === 'rail' ? 1240 : 1100);
 const paneTab = () => document.querySelector('.wrap > .tab:not([hidden])');
 // two columns: the words on the left, the demo, the boards and the bench on the right; every block keeps its order within its
@@ -4330,7 +4403,8 @@ function cardsOf(host){ host.querySelectorAll('.card-off').forEach(e => e.classL
   if (tryEl) cards[cards.length - 1].els.push(tryEl);
   const out = cards.filter(c => c.els.length), nb = out.filter(c => c.board).length; let k = 0;
   out.forEach(c => { if (c.board && nb > 1) c.name = `Board ${++k} of ${nb}`; }); return out; }
-function viewHost(){ if (document.body.dataset.sec === 'classroom') return $(lesson) && $(lesson).querySelector('.lbody'); return paneTab(); }
+function viewHost(){ if (document.body.dataset.sec === 'reference') return null;   // the reference shelf reads as one page, not flight cards
+  if (document.body.dataset.sec === 'classroom') return $(lesson) && $(lesson).querySelector('.lbody'); return paneTab(); }
 // back to the top of whatever scrolls: the page, the open pane, a lesson's body and its columns
 function viewTop(){ scrollTo(0, 0); const t = paneTab(); if (t){ t.scrollTop = 0; t.querySelectorAll('.lbody, .lcol').forEach(e => { e.scrollTop = 0; }); } }
 function cardShow(k){ const C = VIEW.cards; if (!C.length) return; VIEW.card = Math.max(0, Math.min(C.length - 1, k)); const on = new Set(C[VIEW.card].els);
@@ -4399,6 +4473,74 @@ document.querySelectorAll('.more-btn[data-sec]').forEach(o => o.addEventListener
 document.querySelectorAll('.deck-btn[data-sec]').forEach(o => o.addEventListener('click', () => { showTab(o.dataset.sec); viewTop(); }));
 document.querySelectorAll('.tab-btn[data-tab]').forEach(o => o.addEventListener('click', () => { showTab(o.dataset.tab); viewTop(); }));
 document.querySelectorAll('.tab-btn[data-lesson]').forEach(o => o.addEventListener('click', () => { showTab('reeling/' + lessonKey(o.dataset.lesson)); viewTop(); }));
+// links that leave the page open in a new tab (CSS adds the ↗ and says so to screen readers); set on the markup now and on any
+// link drawn later, at the moment it is followed
+const extLink = a => { a.target = '_blank'; a.rel = 'noopener noreferrer'; };
+document.querySelectorAll('a[href^="http"]').forEach(extLink);
+document.addEventListener('click', ev => { const a = ev.target.closest && ev.target.closest('a[href^="http"]'); if (a) extLink(a); }, true);
+// ---------- the Reference shelf: the glossary and the algorithm cards (vendor/reference.js, loaded the first time it opens) ----------
+// In the module's texts [[id]] links to a glossary entry and [[id|words]] links with other words; #glossary/<id> and
+// #algorithms/<id> are links anyone can share. "Where you meet it" is found by searching the scenes' and lessons' own text.
+function refState(){ return refState.s || (refState.s = { R: null, loading: null, byId: {}, cat: 'all' }); }
+function refLoad(){ const S = refState(); return S.loading || (S.loading = import('./vendor/reference.js').then(R => { S.R = R; S.byId = Object.fromEntries(R.GLOSSARY.map(g => [g.id, g])); refBuild(R); return R; })); }
+function refPlain(t){ const B = refState().byId; return String(t || '').replace(/\[\[([^\]|]+)(?:\|([^\]]*))?\]\]/g, (m, id, w) => w || (B[id] ? B[id].term : id)); }
+function refLinks(t){ const B = refState().byId; return String(t || '').replace(/\[\[([^\]|]+)(?:\|([^\]]*))?\]\]/g, (m, id, w) => B[id] ? `<a class="gl-link" href="#glossary/${id}" title="${escHtml(refPlain(B[id].def))}">${w || B[id].term}</a>` : (w || id)); }
+const refExt = ([label, url]) => `<a href="${escHtml(url)}" target="_blank" rel="noopener noreferrer">${escHtml(label)}</a>`;
+const REF_GENERIC = new Set(['sign', 'verify', 'signature', 'hash', 'digest', 'root', 'leaf', 'state', 'level', 'category', 'code', 'ring', 'weight', 'tag', 'chain', 'static', 'logical', 'physical', 'gate', 'context', 'timing', 'rotation', 'cyclic', 'abort', 'reject', 'rejection', 'fault', 'uniform', 'prime', 'vector', 'matrix', 'norm', 'dimension', 'one-way', 'handshake', 'compress', 'compression', 'rounding', 'reduction', 'clock', 'modulus', 'certificate', 'certificates', 'one-time', 'majority', 'floating', 'error correction', 'extendable', 'inclusion', 'unwrap', 'key pair', 'transcript', 'ephemeral', 'deterministic', 'hedged', 'salt', 'seed', 'nonce', 'hint', 'noise', 'basis', 'lattice', 'combiner', 'hybrid', 'decapsulate', 'encapsulate', 'error-correcting', 'Gaussian']);
+function refPlaces(){ const P = [];
+  document.querySelectorAll('#sec-tutorial .tab-btn[data-tab]').forEach(b => { const el = $('tab-' + b.dataset.tab); if (el) P.push({ hash: b.dataset.tab, label: 'Scene: ' + b.querySelector('.std').textContent.trim(), text: el.textContent }); });
+  document.querySelectorAll('.tab-btn[data-lesson]').forEach(b => { const el = $(b.dataset.lesson); if (el) P.push({ hash: 'reeling/' + lessonKey(b.dataset.lesson), label: [...b.querySelectorAll('span')].map(x => x.textContent.trim()).join(' · '), text: el.textContent }); });
+  return P; }
+function refWhere(g, P){ const needles = [g.term.replace(/\s*\(.*\)\s*$/, ''), ...(g.aka || [])].filter(n => n.length >= 3 && !REF_GENERIC.has(n));
+  const res = needles.map(n => new RegExp('(?<![\\w-])' + n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?![\\w-])', /[A-Z0-9]/.test(n) ? '' : 'i'));
+  return P.filter(p => res.some(r => r.test(p.text))); }
+function refBuild(R){
+  const P = refPlaces(), letterOf = g => { const c = g.term.replace(/^[^A-Za-z0-9]+/, '')[0].toUpperCase(); return /[A-Z]/.test(c) ? c : '#'; };
+  const G = [...R.GLOSSARY].sort((a, b) => a.term.replace(/^[^A-Za-z0-9]+/, '').localeCompare(b.term.replace(/^[^A-Za-z0-9]+/, ''), 'en', { sensitivity: 'base' }));
+  const algOf = Object.fromEntries(R.ALGORITHMS.map(a => [a.g, a]));
+  let html = '', cur = '';
+  for (const g of G){ const L = letterOf(g); if (L !== cur){ html += `<h3 class="gl-letter" id="gl-letter-${L === '#' ? 'num' : L}" data-letter="${L}">${L}</h3>`; cur = L; }
+    const where = refWhere(g, P), shown = where.slice(0, 6);
+    html += `<article class="gl-entry" id="g-${g.id}" tabindex="-1" data-cat="${g.cat}" data-letter="${L}" data-text="${escHtml([g.term, ...(g.aka || []), refPlain(g.def), refPlain(g.more)].join(' ').toLowerCase())}">
+      <h4><a class="gl-self" href="#glossary/${g.id}">${escHtml(g.term)}</a><span class="gl-cat">${escHtml(R.CATS[g.cat])}</span></h4>
+      ${g.aka && g.aka.length ? `<p class="gl-aka">Also written: ${g.aka.map(escHtml).join(', ')}</p>` : ''}
+      <p class="gl-def">${refLinks(g.def)}</p>${g.more ? `<p class="gl-more">${refLinks(g.more)}</p>` : ''}
+      ${algOf[g.id] ? `<p class="gl-row"><b>The full card:</b> <a href="#algorithms/${algOf[g.id].id}">${escHtml(algOf[g.id].name)}, under Algorithms</a></p>` : ''}
+      ${shown.length ? `<p class="gl-row"><b>Where you meet it:</b> ${shown.map(p => `<a href="#${p.hash}">${escHtml(p.label)}</a>`).join(' · ')}${where.length > shown.length ? ` · and ${where.length - shown.length} more` : ''}</p>` : ''}
+      ${g.see && g.see.length ? `<p class="gl-row"><b>See also:</b> ${g.see.map(id => `[[${id}]]`).map(refLinks).join(' · ')}</p>` : ''}
+      ${g.refs && g.refs.length ? `<p class="gl-row gl-refs"><b>Read more:</b> ${g.refs.map(refExt).join(' · ')}</p>` : ''}
+    </article>`; }
+  $('gl-list').innerHTML = html;
+  const cats = [['all', 'All topics'], ...Object.entries(R.CATS)];
+  $('gl-cats').innerHTML = cats.map(([k, v]) => `<button type="button" class="gl-chip" data-cat="${k}" aria-pressed="${k === 'all'}">${escHtml(v)}</button>`).join('');
+  const letters = [...new Set(G.map(letterOf))];
+  $('gl-az').innerHTML = letters.map(L => `<button type="button" class="gl-l" data-letter="${L}" aria-label="Jump to ${L === '#' ? 'numbers' : L}">${L}</button>`).join('');
+  $('gl-q').addEventListener('input', refFilter);
+  $('gl-cats').addEventListener('click', ev => { const b = ev.target.closest('.gl-chip'); if (!b) return; refState().cat = b.dataset.cat; document.querySelectorAll('.gl-chip').forEach(c => c.setAttribute('aria-pressed', String(c === b))); refFilter(); });
+  $('gl-az').addEventListener('click', ev => { const b = ev.target.closest('.gl-l'); if (!b || b.disabled) return; const h = document.querySelector(`.gl-letter[data-letter="${b.dataset.letter}"]`); if (h) h.scrollIntoView({ block: 'start', behavior: 'smooth' }); });
+  refFilter();
+  // the cards: a table to choose from, then one card each
+  const row = a => `<tr><td><a href="#algorithms/${a.id}">${escHtml(a.name)}</a></td><td>${escHtml(a.std)}</td><td>${a.kind === 'KEM' ? '[[kem|KEM]]' : '[[digital-signature|Signature]]'}</td><td>${escHtml(a.status)}</td></tr>`;
+  $('alg-body').innerHTML = `<div class="alg-table-wrap"><table class="alg-table"><thead><tr><th>Algorithm</th><th>Standard</th><th>Kind</th><th>Status</th></tr></thead><tbody>${refLinks(R.ALGORITHMS.map(row).join(''))}</tbody></table></div>` +
+    R.ALGORITHMS.map(a => `<article class="alg-card" id="a-${a.id}" tabindex="-1">
+      <h3><a class="gl-self" href="#algorithms/${a.id}">${escHtml(a.name)}</a> <span class="alg-std">${escHtml(a.std)}</span> <span class="alg-status">${escHtml(a.status)}</span></h3>
+      <h4>What it is</h4><p>${refLinks(a.what)}</p>
+      <h4>The mathematics</h4><p>${refLinks(a.math)}</p>
+      <h4>Sizes</h4><p class="alg-sizes">${escHtml(a.sizes)}</p>
+      <h4>Try it on this page</h4><p>${a.try.map(([h, l]) => `<a href="#${h}">${escHtml(l)}</a>`).join(' · ')} · <a href="#glossary/${a.g}">Glossary entry</a></p>
+      <h4>References</h4><ul class="alg-refs">${a.refs.map(r => `<li>${refExt(r)}</li>`).join('')}</ul>
+    </article>`).join('') +
+    `<section class="alg-card alg-reading"><h3>Further reading</h3><ul class="alg-refs">${R.READING.map(r => `<li>${refExt(r)}</li>`).join('')}</ul><p>Every source the page draws on is listed in <a href="credits.html">Credits &amp; sources</a>.</p></section>`;
+}
+function refFilter(){ const q = $('gl-q').value.trim().toLowerCase(), cat = refState().cat; let n = 0, all = 0; const seen = new Set();
+  document.querySelectorAll('.gl-entry').forEach(e => { all++; const on = (cat === 'all' || e.dataset.cat === cat) && (!q || e.dataset.text.includes(q)); e.hidden = !on; if (on){ n++; seen.add(e.dataset.letter); } });
+  document.querySelectorAll('.gl-letter').forEach(h => { h.hidden = !seen.has(h.dataset.letter); });
+  document.querySelectorAll('.gl-l').forEach(b => { b.disabled = !seen.has(b.dataset.letter); });
+  $('gl-count').textContent = n === all ? `${all} terms` : n ? `${n} of ${all} terms` : `No term matches “${$('gl-q').value.trim()}”. Try fewer letters, or All topics.`; }
+async function refShow(name, sub){ await refLoad(); if (!sub) return; const el = $((name === 'glossary' ? 'g-' : 'a-') + sub); if (!el) return;
+  if (el.hidden){ $('gl-q').value = ''; refState().cat = 'all'; document.querySelectorAll('.gl-chip').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.cat === 'all'))); refFilter(); }
+  // after the tab switch has laid out (viewSync measures and redraws), jump straight there: a smooth scroll gets cut short
+  setTimeout(() => { el.scrollIntoView({ block: 'start' }); el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); el.focus({ preventScroll: true }); }, 60); }
 $('menus').addEventListener('click', ev => { if (ev.target.closest('.tab-btn')) drawer(false); });
 document.addEventListener('click', ev => { if (!$('view-panel').hidden && !ev.target.closest('#view-panel, #view-gear')) viewPanel(false);
   if ($('dock').classList.contains('open') && !ev.target.closest('#dock')) drawer(false); });
