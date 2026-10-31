@@ -1,4 +1,7 @@
+<!doctype html>
+<html lang="en">
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Down the Rabbit Hole</title>
 <meta name="description" content="PQC Wonderland: a post-quantum cryptography tutorial and classroom. Every scene runs the real FIPS 203 (ML-KEM), FIPS 204 (ML-DSA) and FIPS 205 (SLH-DSA) algorithms in the browser, with Falcon (the FIPS 206 draft), HQC-KEM (the FIPS 207 to come) and the X-Wing hybrid; thirteen lessons on the mathematics underneath, and an exam.">
 <link rel="stylesheet" href="./vendor/fonts.css">
@@ -384,6 +387,38 @@ body.astro .deck-btn[data-sec="reference"]{--c:var(--sec-gl) !important} body.as
 .gl-pop h4{margin:0 28px 6px 0;font-size:16px} .gl-pop-d{margin:0 0 10px;font-size:14px;line-height:1.5}
 .gl-pop-x{position:absolute;top:6px;right:6px;width:28px;height:28px;border:0;border-radius:8px;background:none;color:var(--muted);cursor:pointer;font:inherit}
 .gl-pop-x:hover{background:var(--line);color:var(--ink)} .gl-pop-go{font-size:14px;color:var(--sec-2)}
+/* ---------- phones: body.phone (heads-up layout, space skin), body.phone-land when held sideways ---------- */
+.vp-phone{display:none}
+body.phone .vp-phone{display:block;margin:0 0 10px;font-size:14px;color:var(--muted)}
+body.phone .vp-opts,body.phone .vp-row:has(.vp-skin),body.phone .skin-switch,body.phone .db-brand{display:none}
+body.phone.docked>.wrap{padding:0 12px}
+body.phone .dockbar{gap:4px;padding:4px 8px calc(4px + env(safe-area-inset-bottom));padding-left:calc(8px + env(safe-area-inset-left));padding-right:calc(8px + env(safe-area-inset-right))}
+body.phone .db-btn{min-width:42px;min-height:42px;justify-content:center}
+body.phone .db-where{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}
+body.phone .db-tools{flex:0 0 auto}
+body.phone:not(.phone-land) .db-theme{display:none}   /* upright, the colour schemes (light ones too) live under the gear */
+body.phone .menus{max-height:min(78dvh,640px);padding:12px 14px}
+body.phone .view-panel{left:0;right:0;width:auto;bottom:var(--dock-h,52px);max-height:calc(100dvh - var(--dock-h,52px) - 12px);border-radius:18px 18px 0 0;padding-bottom:calc(14px + env(safe-area-inset-bottom))}
+body.phone .vp-themes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+body.phone .controls{gap:8px;padding:8px 10px}
+body.phone .controls label{flex-wrap:wrap;gap:4px 8px;font-size:12px;max-width:100%}
+body.phone .controls select,body.phone .controls input[type=text]{max-width:100%;min-width:0;font-size:14px}
+body.phone .controls .spacer{display:none}
+body.phone .controls .btns{margin-left:0;flex-wrap:wrap}
+body.phone .controls .btns button,body.phone .controls button{min-height:40px}
+body.phone pre{overflow-x:auto;max-width:100%}
+body.phone .lbody,body.phone .lbody.spread{display:block}
+body.phone .lbody>.lcol{width:auto;max-width:none}
+body.phone .alg-table-wrap{margin-inline:-4px}
+body.phone .gl-entry,body.phone .alg-card{padding:10px 12px}
+body.phone h2{font-size:clamp(22px,6.4vw,30px)}
+body.phone .lede{font-size:15px}
+/* sideways: the bar stays one slim line and the drawer opens as a side sheet, so the board keeps the height */
+body.phone-land .dockbar{padding-top:2px;padding-bottom:calc(2px + env(safe-area-inset-bottom))}
+body.phone-land .db-btn{min-height:38px}
+body.phone-land .menus{left:auto;right:0;width:min(420px,70vw);max-height:calc(100dvh - var(--dock-h,44px));border-left:1px solid var(--line)}
+body.phone-land .view-panel{left:auto;width:min(460px,70vw);max-height:calc(100dvh - var(--dock-h,44px) - 8px);border-radius:18px 0 0 0}
+@media (max-width:640px){.tabs.tutorial{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs.reference{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* sizes wall */
 .wall{display:grid;gap:14px;margin-top:18px}
 .wall .sizes{margin-top:0}
@@ -810,6 +845,7 @@ body[data-site]:not(.dockrow):not(.rail) .deck{grid-template-columns:repeat(3,mi
     <button type="button" class="vp-opt" role="radio" data-view="hud" aria-checked="false"><svg viewBox="0 0 64 44" aria-hidden="true"><rect x="1" y="1" width="62" height="42" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="5" y="5" width="18" height="3" rx="1.5" fill="currentColor"/><rect x="5" y="11" width="54" height="23" rx="2" fill="currentColor" opacity=".4"/><rect x="1" y="37" width="62" height="6" fill="currentColor"/><path d="M29 33l3-3 3 3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="n">Heads-up</span><span class="d">A slim bar; the menu slides up from it when you want it.</span></button>
     <button type="button" class="vp-opt" role="radio" data-view="classic" aria-checked="false"><svg viewBox="0 0 64 44" aria-hidden="true"><rect x="1" y="1" width="62" height="42" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="5" y="5" width="26" height="4" rx="2" fill="currentColor"/><rect x="5" y="12" width="54" height="6" rx="2" fill="currentColor" opacity=".7"/><rect x="5" y="21" width="54" height="4" rx="2" fill="currentColor" opacity=".45"/><rect x="5" y="28" width="54" height="15" rx="2" fill="currentColor" opacity=".25"/></svg><span class="n">Classic</span><span class="d">Menus on top, the lesson scrolling below, as before.</span></button>
   </div>
+  <p class="vp-phone">Phone layout: the scenes and lessons are under ☰ Menu, and ◂ ▸ step through them. Turn the phone sideways for wider boards. Pick a colour scheme below.</p>
   <label class="vp-fit"><input type="checkbox" id="view-fit" checked> Fit the demo to the screen</label>
   <div class="vp-row"><span class="lbl">Depth</span><button type="button" data-rwmode="b" aria-pressed="false">Simple</button><button type="button" data-rwmode="n" aria-pressed="false" hidden>Normal</button><button type="button" data-rwmode="a" aria-pressed="false">Advanced</button><button type="button" data-rwmode="x" aria-pressed="false" hidden>Expert</button></div>
   <div class="vp-row vp-theme"><span class="lbl">Theme</span>
@@ -4382,7 +4418,7 @@ const VIEWS = ['dock', 'rail', 'cards', 'hud', 'classic'], VIEW_KEY = 'rabbit-ho
 const SITE = window.__SITE || null;
 const VIEW = { pick: 'rail', fit: true, ready: false, card: 0, cards: [], host: null, raf: 0 };   // Console is the default (Ridley, 2026-10-24)
 try { const v = localStorage.getItem(VIEW_KEY); if (VIEWS.includes(v)) VIEW.pick = v; VIEW.fit = localStorage.getItem(FIT_KEY) !== 'off'; } catch (e) {}
-const viewEff = () => ['tutorial', 'classroom', 'reference'].includes(document.body.dataset.sec) && !document.body.classList.contains('matrix') ? VIEW.pick : 'classic';
+const viewEff = () => ['tutorial', 'classroom', 'reference'].includes(document.body.dataset.sec) && !document.body.classList.contains('matrix') ? (document.body.classList.contains('phone') ? 'hud' : VIEW.pick) : 'classic';
 const viewSpread = v => v !== 'classic' && innerWidth >= (v === 'rail' ? 1240 : 1100);
 const paneTab = () => document.querySelector('.wrap > .tab:not([hidden])');
 // two columns: the words on the left, the demo, the boards and the bench on the right; every block keeps its order within its
@@ -4622,7 +4658,7 @@ try { let t = localStorage.getItem(THEME_KEY); if (t === 'light') t = 'dawn'; if
   let lt = l; if (!localStorage.getItem(THEME_KEY + '-v2')){ if (lt === 'paper' && THEME.pick !== 'paper'){ lt = 'dawn'; localStorage.setItem(THEME_KEY + '-light', 'dawn'); } localStorage.setItem(THEME_KEY + '-v2', '1'); }
   if (THEMES[d] === 'dark') THEME.dark = d; if (THEMES[lt] === 'light') THEME.light = lt; THEME[THEMES[THEME.pick]] = THEME.pick; } catch (e) {}
 function themeSync(){ const b = document.body, light = THEMES[THEME.pick] === 'light'; b.dataset.theme = THEME.pick; b.classList.toggle('light', light);
-  const t = $('theme-btn'); if (t){ t.textContent = light ? '☀ Light' : '☾ Dark'; t.setAttribute('aria-pressed', String(light)); t.title = light ? `Light (${THEME.light}); click for ${THEME.dark}` : `Dark (${THEME.dark}); click for ${THEME.light}`; }
+  const t = $('theme-btn'); if (t){ const short = document.body.classList.contains('phone'); t.textContent = light ? (short ? '☀' : '☀ Light') : (short ? '☾' : '☾ Dark'); t.setAttribute('aria-pressed', String(light)); t.title = light ? `Light (${THEME.light}); click for ${THEME.dark}` : `Dark (${THEME.dark}); click for ${THEME.light}`; }
   document.querySelectorAll('.vp-th').forEach(o => o.setAttribute('aria-checked', String(o.dataset.theme === THEME.pick))); }
 function themeSet(name){ if (name === 'light' || name === true) name = THEME.light; if (name === 'dark' || name === false) name = THEME.dark; if (!THEMES[name]) return;
   THEME.pick = name; THEME[THEMES[name]] = name; try { localStorage.setItem(THEME_KEY, name); localStorage.setItem(THEME_KEY + '-' + THEMES[name], name); } catch (e) {}
@@ -4692,4 +4728,17 @@ $('skin-switch').addEventListener('click', () => skinSet(!document.body.classLis
 window.__rabbitHole.skin = { set: skinSet, get: () => SKIN.on, level: skinLevel, refresh: () => { if (SKIN.on) skinApply(); }, ready: () => SKIN.ready };
 let skin0 = 'astro'; try { skin0 = localStorage.getItem(SKIN_KEY) || skin0; } catch (e) {}
 skinSet(skin0 !== 'wonder', false);   // same rule as the boot script: anything but 'wonder' is the space skin
+// ---------- phones (Ridley, 2026-10-31): a narrow screen, or a short one held sideways, gets one layout, the heads-up bar, in the
+// space skin (without overwriting the skin saved for other screens), with the colour schemes under the gear. body.phone and
+// body.phone-land drive the CSS; turning the phone re-measures.
+const PHONE_MQ = matchMedia('(max-width: 640px), (max-height: 500px) and (max-width: 950px)');
+function phoneSync(){ const b = document.body, on = PHONE_MQ.matches, was = b.classList.contains('phone');
+  b.classList.toggle('phone', on); b.classList.toggle('phone-land', on && innerWidth > innerHeight);
+  if (on && !SKIN.on) skinSet(true, false);
+  else if (!on && was){ let s0 = 'astro'; try { s0 = localStorage.getItem(SKIN_KEY) || s0; } catch (e) {} if ((s0 !== 'wonder') !== SKIN.on) skinSet(s0 !== 'wonder', false); }
+  if (on !== was){ viewPanel(false); drawer(false); }
+  themeSync(); viewSync(); }
+PHONE_MQ.addEventListener('change', phoneSync); addEventListener('orientationchange', () => setTimeout(phoneSync, 120));
+addEventListener('resize', () => { const b = document.body; if (b.classList.contains('phone')) b.classList.toggle('phone-land', innerWidth > innerHeight); });
+phoneSync();
 </script>

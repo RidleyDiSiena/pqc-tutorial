@@ -34,13 +34,13 @@ is left out on purpose.
 
 ## 2. Mobile-friendly skin
 
-At phone width (390 px) the scenes are hard to use. Found while testing on 2026-10-31:
+Done 2026-10-31 for the astronaut skin: phones (under 640 px wide, or short and sideways) get one layout, the heads-up bar,
+with the colour schemes under the gear and a side-sheet drawer when held sideways. The page also gained the doctype and
+viewport tag it was missing, without which phones drew it as a shrunk desktop page. Still to do:
 
-- The side rail takes about 224 px, leaving the scene about 130 px. The rail should not be the layout on phones.
-- Every scene's settings row overflows: the pickers are 231 px wide and their labels don't shrink. The panel scrolls
-  sideways, so the controls can be reached, but only with a sideways swipe.
-- In the dock, cards and HUD layouts only a few rows spill over (`tt-param`, `pw-cmp`, `bp-broken`).
-- Intended clipping, not a bug: the animated hex strips (`.cipherstrip`) are cut off on purpose.
+- The Wonderland skin on phones (phones show the astronaut skin for now; the saved skin is kept for larger screens).
+- Testing on real devices (checked so far in 390×844 and 844×390 frames in desktop Chrome).
+- Busy scenes still stack tall settings rows in portrait (Key encapsulation's is about 190 px).
 
 ## 3. "Working…" note and a lesson on why some steps are slow
 
