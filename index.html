@@ -4381,6 +4381,10 @@ document.querySelectorAll('.vp-opt').forEach(o => o.addEventListener('click', ()
 $('view-fit').addEventListener('change', e => { VIEW.fit = e.target.checked; try { localStorage.setItem(FIT_KEY, VIEW.fit ? 'on' : 'off'); } catch (er) {} viewFit(); });
 document.querySelectorAll('.vp-skin').forEach(o => o.addEventListener('click', async () => { if (window.__rabbitHole && window.__rabbitHole.skin) await window.__rabbitHole.skin.set(o.dataset.skin === 'astro'); viewSync(); }));
 document.querySelectorAll('.more-btn[data-sec]').forEach(o => o.addEventListener('click', () => { viewPanel(false); showTab(o.dataset.sec); viewTop(); }));
+// the section deck, the scene tabs and the lesson tabs: each click goes through showTab, which also rewrites the link
+document.querySelectorAll('.deck-btn[data-sec]').forEach(o => o.addEventListener('click', () => { showTab(o.dataset.sec); viewTop(); }));
+document.querySelectorAll('.tab-btn[data-tab]').forEach(o => o.addEventListener('click', () => { showTab(o.dataset.tab); viewTop(); }));
+document.querySelectorAll('.tab-btn[data-lesson]').forEach(o => o.addEventListener('click', () => { showTab('reeling/' + lessonKey(o.dataset.lesson)); viewTop(); }));
 $('menus').addEventListener('click', ev => { if (ev.target.closest('.tab-btn')) drawer(false); });
 document.addEventListener('click', ev => { if (!$('view-panel').hidden && !ev.target.closest('#view-panel, #view-gear')) viewPanel(false);
   if ($('dock').classList.contains('open') && !ev.target.closest('#dock')) drawer(false); });
