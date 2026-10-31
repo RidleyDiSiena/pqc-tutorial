@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PQC Wonderland · Credits</title>
+<meta name="description" content="The standards, papers, software, fonts and stories PQC Wonderland is built on, with their licences.">
+<link rel="stylesheet" href="./vendor/fonts.css">
+<style>
+:root{--bg:#07090d;--panel:#0e1219;--line:#232a36;--ink:#e6edf3;--muted:#9aa7b4;--accent:#5cc98e;--accent-2:#58b9c9;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4f2ee;--panel:#ffffff;--line:#d8d4cb;--ink:#1a1d22;--muted:#58606b;--accent:#0b6b3a;--accent-2:#0e6b7c;color-scheme:light}}
+:root[data-theme="light"]{--bg:#f4f2ee;--panel:#ffffff;--line:#d8d4cb;--ink:#1a1d22;--muted:#58606b;--accent:#0b6b3a;--accent-2:#0e6b7c;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Exo 2",system-ui,sans-serif;padding:0 16px 48px}
+main{max-width:860px;margin:0 auto}
+header{padding:32px 0 8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+h1{font:400 30px/1.2 "Righteous",system-ui,sans-serif;margin:0 0 6px;color:var(--accent)}
+h2{font:400 20px/1.3 "Righteous",system-ui,sans-serif;margin:32px 0 8px;color:var(--accent-2)}
+p{margin:8px 0;color:var(--muted)} p b,li b{color:var(--ink);font-weight:500}
+a{color:var(--accent-2)} a:hover{color:var(--accent)}
+ul{margin:8px 0;padding-left:20px} li{margin:6px 0;color:var(--muted)}
+code{font-family:"Share Tech Mono",ui-monospace,monospace;font-size:14px;color:var(--ink)}
+.note{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.back{display:inline-block;margin-top:4px;font-family:"Share Tech Mono",ui-monospace,monospace;font-size:14px}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>Credits and sources</h1>
+  <p>PQC Wonderland is a post-quantum cryptography tutorial and classroom by <b>Ridley DiSiena</b>. It teaches published standards and published research; this page lists that work, the software and fonts the page ships with, and their licences.</p>
+  <a class="back" href="./">◂ back to PQC Wonderland</a>
+</header>
+
+<h2>Standards the scenes implement or follow</h2>
+<ul>
+  <li><b>FIPS 203</b>, Module-Lattice-Based Key-Encapsulation Mechanism Standard (ML-KEM), NIST, 2024. <a href="https://csrc.nist.gov/pubs/fips/203/final">csrc.nist.gov</a></li>
+  <li><b>FIPS 204</b>, Module-Lattice-Based Digital Signature Standard (ML-DSA), NIST, 2024. <a href="https://csrc.nist.gov/pubs/fips/204/final">csrc.nist.gov</a></li>
+  <li><b>FIPS 205</b>, Stateless Hash-Based Digital Signature Standard (SLH-DSA), NIST, 2024. <a href="https://csrc.nist.gov/pubs/fips/205/final">csrc.nist.gov</a></li>
+  <li><b>FIPS 206</b> (draft), FN-DSA, and the Falcon specification it is based on: Fouque, Hoffstein, Kirchner, Lyubashevsky, Pornin, Prest, Ricosset, Seiler, Whyte and Zhang, <i>Falcon: Fast-Fourier Lattice-based Compact Signatures over NTRU</i>, specification v1.2. <a href="https://falcon-sign.info/">falcon-sign.info</a></li>
+  <li><b>HQC</b> (selected by NIST in March 2025; the future FIPS 207): Aguilar Melchor, Aragon, Bettaieb, Bidoux, Blazy, Deneuville, Gaborit, Persichetti, Zémor and others, <i>Hamming Quasi-Cyclic (HQC)</i>, round 4 specification of 22 August 2025, and the submitters' reference implementation v5.0.0, whose known-answer test values the classroom reproduces. <a href="https://pqc-hqc.org/">pqc-hqc.org</a></li>
+  <li><b>NIST IR 8545</b>, Status Report on the Fourth Round of the NIST Post-Quantum Cryptography Standardization Process, 2025. <a href="https://csrc.nist.gov/pubs/ir/8545/final">csrc.nist.gov</a></li>
+  <li><b>NIST IR 8547</b> (initial public draft), Transition to Post-Quantum Cryptography Standards, 2024. <a href="https://csrc.nist.gov/pubs/ir/8547/ipd">csrc.nist.gov</a></li>
+  <li><b>NIST PQC Call for Proposals</b> (2016), §4.A.5, the security categories. <a href="https://csrc.nist.gov/projects/post-quantum-cryptography">csrc.nist.gov</a></li>
+  <li><b>FIPS 202</b> (SHA-3 and SHAKE), <b>FIPS 180-4</b> (SHA-2), <b>FIPS 186-5</b> (digital signatures), <b>SP 800-208</b> (stateful hash-based signatures, LMS and XMSS), <b>SP 800-57</b> (key management), NIST.</li>
+</ul>
+
+<h2>IETF documents</h2>
+<ul>
+  <li><b>RFC 9180</b>, Hybrid Public Key Encryption (the DHKEM used for X25519 and the NIST curves). <a href="https://www.rfc-editor.org/rfc/rfc9180">rfc-editor.org</a></li>
+  <li><b>RFC 8017</b>, PKCS #1 v2.2 (RSA-OAEP). <a href="https://www.rfc-editor.org/rfc/rfc8017">rfc-editor.org</a></li>
+  <li><b>RFC 5280</b> (X.509 certificates), <b>RFC 5480</b> and <b>RFC 8410</b> (elliptic-curve and Edwards keys in certificates), <b>RFC 4211</b> (CRMF, proof of possession by challenge), <b>RFC 2986</b> (PKCS #10).</li>
+  <li><b>RFC 5869</b> (HKDF), <b>RFC 2104</b> (HMAC), <b>RFC 3394</b> (AES Key Wrap), <b>RFC 9629</b> (KEM algorithms in CMS). <a href="https://www.rfc-editor.org/rfc/rfc9629">rfc-editor.org</a></li>
+  <li><b>RFC 6962</b> and <b>RFC 9162</b>, Certificate Transparency (the Merkle tree hashing and proofs). <a href="https://www.rfc-editor.org/rfc/rfc9162">rfc-editor.org</a></li>
+  <li><b>RFC 7748</b> (X25519, X448), <b>RFC 8032</b> (EdDSA), <b>RFC 6979</b> (deterministic ECDSA), <b>RFC 8391</b> (XMSS), <b>RFC 8446</b> (TLS 1.3), <b>RFC 10024</b> (the hybrid X25519MLKEM768 group, as cited in the Both Pills scene).</li>
+  <li><b>X-Wing</b>: Barbosa, Connolly, Duarte, Kaiser, Schwabe, Varner and Westerbaan, draft-connolly-cfrg-xwing-kem. <a href="https://datatracker.ietf.org/doc/draft-connolly-cfrg-xwing-kem/">datatracker.ietf.org</a></li>
+  <li><b>Hybrid KEMs</b> (the QSF construction), draft-irtf-cfrg-hybrid-kems. <a href="https://datatracker.ietf.org/doc/draft-irtf-cfrg-hybrid-kems/">datatracker.ietf.org</a></li>
+  <li><b>KEM-based authentication in IKEv2</b>, draft-wang-ipsecme-kem-auth-ikev2 (the Tea Party's mutual mode). <a href="https://datatracker.ietf.org/doc/draft-wang-ipsecme-kem-auth-ikev2/">datatracker.ietf.org</a></li>
+  <li>LAMPS and PLANTS drafts referenced in the lessons: draft-ietf-lamps-kyber-certificates, draft-ietf-lamps-cms-kyber, draft-massimo-lamps-hqc-certificates, draft-ietf-plants-merkle-tree-certs.</li>
+</ul>
+
+<h2>Research the lessons teach</h2>
+<ul>
+  <li>Regev, “On lattices, learning with errors, random linear codes, and cryptography”, STOC 2005; J. ACM 56(6), 2009. (Lessons 2–4.)</li>
+  <li>Fujisaki and Okamoto, “Secure integration of asymmetric and symmetric encryption schemes”, CRYPTO 1999; and Hofheinz, Hövelmanns and Kiltz, “A modular analysis of the Fujisaki–Okamoto transformation”, TCC 2017. (The FO transform, lessons 4 and 12.)</li>
+  <li>Lyubashevsky, “Fiat–Shamir with aborts”, ASIACRYPT 2009, and “Lattice signatures without trapdoors”, EUROCRYPT 2012. (Rejection sampling, lesson 5.)</li>
+  <li>Lamport, “Constructing digital signatures from a one way function”, SRI CSL-98, 1979; Merkle, “A certified digital signature”, CRYPTO 1989; Hülsing, “W-OTS+: shorter signatures for hash-based signature schemes”, AFRICACRYPT 2013. (Lessons 7–9.)</li>
+  <li>Bernstein, Hülsing, Kölbl, Niederhagen, Rijneveld and Schwabe, “The SPHINCS<sup>+</sup> signature framework”, ACM CCS 2019. (SLH-DSA, lesson 9.)</li>
+  <li>Gentry, Peikert and Vaikuntanathan, “Trapdoors for hard lattices and new cryptographic constructions”, STOC 2008. (Falcon as trapdoor sampling, lesson 10.)</li>
+  <li>Reed, Muller (1954) and Reed and Solomon (1960) on the codes HQC concatenates. (Lesson 12.)</li>
+  <li>Shor, “Algorithms for quantum computation: discrete logarithms and factoring”, FOCS 1994; Grover, “A fast quantum mechanical algorithm for database search”, STOC 1996. (Lessons 11 and 13.)</li>
+  <li>Schwabe, Stebila and Wiggers, “Post-quantum TLS without handshake signatures” (KEMTLS), ACM CCS 2020. (The Tea Party's idea of authenticating with a KEM.)</li>
+  <li>Lagrange (1773) and Gauss (1801) for two-dimensional lattice reduction, the classroom's Expert bench 1.</li>
+</ul>
+
+<h2>Lesson 13's sources (Q-day and harvest now, decrypt later)</h2>
+<p>Lesson 13 draws every figure from a dated source, listed on the lesson itself; these are the same entries. Figures marked <i>secondary</i> were read in reporting, not the paper.</p>
+<ul>
+  <li>Gidney and Ekerå, “How to factor 2048 bit RSA integers in 8 hours using 20 million noisy qubits”, arXiv:1905.09749 (2019); Quantum 5:433 (2021).</li>
+  <li>Gidney, “How to factor 2048 bit RSA integers with less than a million noisy qubits”, arXiv:2505.15917 (2025).</li>
+  <li>Webster et al., “The Pinnacle Architecture: reducing the cost of breaking RSA-2048 to 100 000 physical qubits using quantum LDPC codes”, arXiv:2602.11457 (2026), preprint; <i>secondary</i>.</li>
+  <li>Roetteler, Naehrig, Svore and Lauter, “Quantum resource estimates for computing elliptic curve discrete logarithms”, ASIACRYPT 2017, arXiv:1706.06752.</li>
+  <li>Litinski, “How to compute a 256-bit elliptic curve private key with only 50 million Toffoli gates”, arXiv:2306.08585 (2023).</li>
+  <li>Babbush, Zalcman, Gidney et al., “Securing elliptic curve cryptocurrencies against quantum vulnerabilities”, arXiv:2603.28846 (2026).</li>
+  <li>Jaques, Naehrig, Roetteler and Virdia, “Implementing Grover oracles for quantum key search on AES and LowMC”, EUROCRYPT 2020.</li>
+  <li>Bernstein, “Cost analysis of hash collisions: will quantum computers make SHARCS obsolete?”, SHARCS 2009.</li>
+  <li>Chailloux and Loyer, “Lattice sieving via quantum random walks”, ASIACRYPT 2021.</li>
+  <li>Chen, “Quantum algorithms for lattice problems”, ePrint 2024/555 (withdrawn claim).</li>
+  <li>Google Quantum AI, “Quantum error correction below the surface code threshold”, Nature 638 (2025), arXiv:2408.13687.</li>
+  <li>IBM Condor (2023), Quantinuum Helios (2025, arXiv:2602.22211), Microsoft and Atom Computing (2024): <i>secondary</i>. Manetsch et al., “A tweezer array with 6,100 highly coherent atomic qubits”, Nature (2025).</li>
+  <li>Mosca, “Cybersecurity in an era with quantum computers: will we be ready?”, ePrint 2015/1075; IEEE Security &amp; Privacy 16(5), 2018. Mosca and Piani, “Quantum Threat Timeline Report 2025”, Global Risk Institute and evolutionQ.</li>
+  <li>UK NCSC, “Timelines for migration to post-quantum cryptography” (2025); NSA, CNSA 2.0 (<i>secondary</i>); SEC Regulation S-X Rule 2-06; Executive Order 13526; US census 72-year rule; NHS England Records Management Code of Practice (<i>secondary</i>).</li>
+</ul>
+
+<h2>Software</h2>
+<ul>
+  <li><b>noble-post-quantum</b> 0.7.1, <b>noble-curves</b> 2.4.0, <b>noble-hashes</b> 2.4.0 and <b>noble-ciphers</b> 2.4.0 by Paul Miller (noble-ciphers also credits Thomas Pornin), MIT licence, bundled as <code>vendor/pq.js</code>. They supply ML-KEM, ML-DSA, SLH-DSA, Falcon, X-Wing and QSF, the elliptic curves, SHA-2/SHA-3 and ChaCha20-Poly1305. Licences: <code>LICENSES/noble-*.txt</code>. <a href="https://github.com/paulmillr/noble-post-quantum">github.com/paulmillr</a></li>
+  <li><b>The page's HQC</b> (the Pool of Tears and lesson 12) is the author's own JavaScript, a port of the author's Python implementation (<code>pqlab.hqc</code>), written from the HQC specification and the submitters' reference implementation v5.0.0, and checked against that implementation's known-answer tests.</li>
+  <li><b>WebCrypto</b>, the browser's built-in API: AES, RSA-OAEP, HKDF, HMAC and SHA-2 where the scenes use them.</li>
+  <li>Everything else on the page (the scenes, the toy schemes, the DER encoder, the demos, the classroom and its exam) is the author's own work.</li>
+</ul>
+
+<h2>Fonts</h2>
+<ul>
+  <li><b>Exo 2</b> (The Exo 2 Project Authors), <b>Monoton</b> (Vernon Adams), <b>Righteous</b> (Astigmatic) and <b>Share Tech Mono</b> (Carrois Type Design), from Google Fonts, served from this site under the SIL Open Font License 1.1. Licences: <code>LICENSES/ofl-*.txt</code>.</li>
+</ul>
+
+<h2>The story</h2>
+<ul>
+  <li>Lewis Carroll, <i>Alice's Adventures in Wonderland</i> (1865) and <i>Through the Looking-Glass, and What Alice Found There</i> (1871), including “Jabberwocky”: the cast, the scene names and the lines the scenes borrow. Both books are in the public domain.</li>
+</ul>
+
+<h2>Licence</h2>
+<ul>
+  <li><b>Code</b> (the JavaScript, HTML and CSS): MIT licence, © 2026 Ridley DiSiena. <code>LICENSE</code></li>
+  <li><b>Content</b> (the lesson and scene text, explanations, exam questions, demo narration and diagrams): <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a>, © 2026 Ridley DiSiena. Credit “PQC Wonderland by Ridley DiSiena”. <code>LICENSE-CONTENT</code></li>
+  <li><b>Third-party</b> software and fonts keep their own licences, listed above and in <code>LICENSES/</code>.</li>
+</ul>
+
+<p class="note">Nothing here is a vetted cryptographic implementation. The toy schemes are for teaching, the page's own code is not constant time, and none of it should protect real data.</p>
+</main>
+</body>
+</html>
