@@ -8,10 +8,8 @@ The page cites the November 2024 initial public draft. The final report changes 
 suits a general audience. Federal-only material (EO 14412, OMB M-26-15, PIV/FICAM, the 2030/2031 agency deadlines)
 is left out on purpose.
 
-- **Correct the dates (Q-day lesson, `ir8547` source, credits link).** The draft deprecated only 112-bit RSA and ECC
-  after 2030. The final deprecates *all* quantum-vulnerable public-key algorithms (RSA, ECDSA, EdDSA, finite-field and
-  elliptic-curve DH and MQV) after 2030, and disallows them after 2035. Point credits at
-  `https://csrc.nist.gov/pubs/ir/8547/final` instead of `/ipd`.
+- ~~**Correct the dates (Q-day lesson, `ir8547` source, credits link).**~~ Done 2026-10-31: all quantum-vulnerable
+  public-key algorithms deprecated after 2030 and disallowed after 2035; credits point at the final report.
 - **ML-KEM-768 is NIST's recommended default** ("a large security margin at a reasonable performance cost"). The
   page already defaults to 768; say why.
 - **HQC becomes approved once its FIPS is published, and NIST plans no further KEMs.** Fits the HQC scene.
