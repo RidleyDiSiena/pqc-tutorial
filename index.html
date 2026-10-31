@@ -500,7 +500,6 @@ body.astro .skinlevel{display:flex}
 .skin-switch[aria-checked="false"] .ico.astro{color:var(--black)} .skin-switch[aria-checked="true"] .ico.rabbit{color:#fff}
 .skin-switch:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 body:not(.astro) .skin-switch{border-color:var(--line);background:var(--panel-2)} body:not(.astro) .skin-switch .ico{color:var(--muted)}
-body[data-site] .skin-switch{display:none}   /* a site build is the space skin alone */
 header>.skinbar{grid-area:bar}
 .skinbar{margin-left:0;align-self:start}
 body.astro header>p,body.astro .tab>.lede,body.astro .sec-blurb p{font-size:13.5px}
@@ -4473,5 +4472,5 @@ new MutationObserver(() => { skinSyncLevel(); if (SKIN.on && SKIN.dict) skinAppl
 $('skin-switch').addEventListener('click', () => skinSet(!document.body.classList.contains('astro')));
 window.__rabbitHole.skin = { set: skinSet, get: () => SKIN.on, level: skinLevel, refresh: () => { if (SKIN.on) skinApply(); }, ready: () => SKIN.ready };
 let skin0 = 'astro'; try { skin0 = localStorage.getItem(SKIN_KEY) || skin0; } catch (e) {}
-skinSet(skin0 === 'astro', false);
+skinSet(skin0 !== 'wonder', false);   // same rule as the boot script: anything but 'wonder' is the space skin
 </script>
