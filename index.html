@@ -378,6 +378,12 @@ body.astro .deck-btn[data-sec="reference"]{--c:var(--sec-gl) !important} body.as
 .alg-sizes{font-family:"Share Tech Mono",monospace;font-size:14px}
 .alg-refs{margin:4px 0;padding-left:18px} .alg-refs li{margin:3px 0}
 @media (prefers-reduced-motion:reduce){.gl-entry.flash,.alg-card.flash{animation:none;outline:2px solid var(--sec-2)}}
+.gl-auto{color:inherit;text-decoration:underline dotted;text-decoration-color:color-mix(in srgb,currentColor 55%,transparent);text-underline-offset:3px;cursor:help}
+.gl-auto:hover,.gl-auto:focus-visible{text-decoration-style:solid;text-decoration-color:currentColor}
+.gl-pop{position:fixed;z-index:1000;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 32px rgb(0 0 0 / .4);padding:12px 14px;max-height:70vh;overflow:auto}
+.gl-pop h4{margin:0 28px 6px 0;font-size:16px} .gl-pop-d{margin:0 0 10px;font-size:14px;line-height:1.5}
+.gl-pop-x{position:absolute;top:6px;right:6px;width:28px;height:28px;border:0;border-radius:8px;background:none;color:var(--muted);cursor:pointer;font:inherit}
+.gl-pop-x:hover{background:var(--line);color:var(--ink)} .gl-pop-go{font-size:14px;color:var(--sec-2)}
 /* sizes wall */
 .wall{display:grid;gap:14px;margin-top:18px}
 .wall .sizes{margin-top:0}
@@ -794,6 +800,7 @@ body[data-site]:not(.dockrow):not(.rail) .deck{grid-template-columns:repeat(3,mi
   </span>
 </div>
 </div>
+<div class="gl-pop" id="gl-pop" role="dialog" aria-labelledby="gl-pop-t" hidden><button type="button" class="gl-pop-x" aria-label="Close">✕</button><h4 id="gl-pop-t"></h4><p class="gl-pop-d"></p><a class="gl-pop-go" href="#glossary">Open in the glossary →</a></div>
 <div class="view-panel" id="view-panel" role="dialog" aria-label="View and settings" hidden>
   <div class="vp-head"><span>View</span><button type="button" class="db-btn" id="view-close" aria-label="Close">✕</button></div>
   <div class="vp-opts" role="radiogroup" aria-label="Layout">
@@ -4492,7 +4499,7 @@ function refPlaces(){ const P = [];
   document.querySelectorAll('.tab-btn[data-lesson]').forEach(b => { const el = $(b.dataset.lesson); if (el) P.push({ hash: 'reeling/' + lessonKey(b.dataset.lesson), label: [...b.querySelectorAll('span')].map(x => x.textContent.trim()).join(' · '), text: el.textContent }); });
   return P; }
 function refWhere(g, P){ const needles = [g.term.replace(/\s*\(.*\)\s*$/, ''), ...(g.aka || [])].filter(n => n.length >= 3 && !REF_GENERIC.has(n));
-  const res = needles.map(n => new RegExp('(?<![\\w-])' + n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?![\\w-])', /[A-Z0-9]/.test(n) ? '' : 'i'));
+  const res = needles.map(n => new RegExp('(?<![\\w-])' + n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?![\\w-])', /[A-Z0-9]/.test(n.slice(1)) ? '' : 'i'));
   return P.filter(p => res.some(r => r.test(p.text))); }
 function refBuild(R){
   const P = refPlaces(), letterOf = g => { const c = g.term.replace(/^[^A-Za-z0-9]+/, '')[0].toUpperCase(); return /[A-Z]/.test(c) ? c : '#'; };
@@ -4541,6 +4548,56 @@ async function refShow(name, sub){ await refLoad(); if (!sub) return; const el =
   if (el.hidden){ $('gl-q').value = ''; refState().cat = 'all'; document.querySelectorAll('.gl-chip').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.cat === 'all'))); refFilter(); }
   // after the tab switch has laid out (viewSync measures and redraws), jump straight there: a smooth scroll gets cut short
   setTimeout(() => { el.scrollIntoView({ block: 'start' }); el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); el.focus({ preventScroll: true }); }, 60); }
+// ---------- glossary links in the lesson text ----------
+// The skin translates whole text nodes and restores them by exact match, so these links are added at run time, after the skin has
+// written, and taken out again (each text node rejoined exactly) before it runs: skinClear calls refUnlink; skinApply, skinSet and a
+// change of depth call refRelinkSoon. While linking, the skin's observer is paused, so the new fragments are not translated twice.
+// A link goes on the first visible use of each term in a lesson (in the current depth) and in each scene's introduction; clicking
+// one opens a small card with the definition instead of leaving the lesson (ctrl- or cmd-click opens the glossary entry).
+const SKIN_OBS = { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['class'] };
+const LINK_SKIP = new Set(['sign', 'verify', 'signature', 'hash', 'digest', 'root', 'leaf', 'state', 'level', 'category', 'code', 'ring', 'weight', 'tag', 'chain', 'static', 'logical', 'physical', 'gate', 'context', 'timing', 'rotation', 'cyclic', 'abort', 'reject', 'rejection', 'fault', 'uniform', 'one-way', 'handshake', 'compress', 'compression', 'rounding', 'reduction', 'clock', 'error correction', 'extendable', 'inclusion', 'unwrap', 'transcript', 'deterministic', 'salt', 'seed', 'nonce', 'hint', 'noise', 'combiner', 'hybrid', 'certificate', 'certificates', 'majority', 'floating', 'error-correcting', 'encapsulate', 'decapsulate', 'one-time', 'key pair', 'vector', 'matrix', 'norm', 'dimension', 'prime', 'modulus', 'ctx', 'level', 'timing', 'code', 'tag']);
+const LINK_EXCLUDE = 'a, button, label, select, option, input, textarea, summary, h1, h2, h3, h4, h5, h6, code, kbd, svg, .gl-auto, .tab-btn, .readout, .val, .lbl, #rwx-qs';
+function refLinkState(){ return refLinkState.s || (refLinkState.s = { links: [], timer: 0, re: null, map: null }); }
+function refNeedles(){ const S = refLinkState(); if (S.re) return S; const map = new Map();
+  for (const g of refState().R.GLOSSARY) for (const n of [g.term.replace(/\s*\(.*\)\s*$/, ''), ...(g.aka || [])]){
+    if (n.length < 3 || LINK_SKIP.has(n) || LINK_SKIP.has(n.toLowerCase())) continue; const k = n.toLowerCase(); if (!map.has(k)) map.set(k, []); map.get(k).push({ n, id: g.id, cs: /[A-Z0-9]/.test(n.slice(1)) }); }
+  const keys = [...map.keys()].sort((a, b) => b.length - a.length).map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  S.re = new RegExp('(?<![\\w-])(?:' + keys.join('|') + ')(?![\\w-])', 'gi'); S.map = map; return S; }
+function refEligible(t, root, mode){ const p = t.parentElement; if (!p || p.id || p.closest(LINK_EXCLUDE)) return false;
+  if (mode) for (let e = p; e && e !== root.parentElement; e = e.parentElement){ const dm = e.getAttribute('data-modes'); if (dm != null && !dm.includes(mode)) return false; }
+  return true; }
+function refUnlink(){ const S = refLinkState(); for (let i = S.links.length - 1; i >= 0; i--){ const L = S.links[i]; L.node.data = L.orig; L.added.forEach(x => x.remove()); } S.links = []; }
+function refLinkRun(){ if (!refState().R) return; const S = refNeedles(), B = refState().byId, mo = SKIN.on && SKIN.dict && SKIN.mo ? SKIN.mo : null;
+  if (mo){ const recs = mo.takeRecords(); if (recs.length) skinRecords(recs); mo.disconnect(); }
+  refUnlink(); const mode = $('tab-reeling').dataset.mode, used = new Map();
+  const roots = [...document.querySelectorAll('#tab-reeling details.lesson:not(#rw-lx)')].map(r => [r, mode])
+    .concat([...document.querySelectorAll('section.tab:not(.ref):not(#tab-reeling) > .lede, section.tab:not(.ref):not(#tab-reeling) > p.foot')].map(r => [r, '']));
+  for (const [root, md] of roots){ const key = root.closest('details.lesson') || root.closest('section.tab'); if (!used.has(key)) used.set(key, new Set()); const seen = used.get(key);
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), nodes = []; let n; while ((n = w.nextNode())) if (n.data.trim().length > 2 && refEligible(n, root, md)) nodes.push(n);
+    for (let t of nodes){ S.re.lastIndex = 0; let m;
+      while ((m = S.re.exec(t.data))){ const c = (S.map.get(m[0].toLowerCase()) || []).find(x => !x.cs || x.n === m[0]); if (!c || seen.has(c.id)) continue; seen.add(c.id);
+        const orig = t.data, mid = t.splitText(m.index), tail = mid.splitText(m[0].length), a = document.createElement('a');
+        a.className = 'gl-auto'; a.href = '#glossary/' + c.id; a.dataset.g = c.id; a.title = refPlain(B[c.id].def); mid.replaceWith(a); a.appendChild(mid);
+        S.links.push({ node: t, orig, added: [a, tail] }); t = tail; S.re.lastIndex = 0; } } }
+  if (mo) mo.observe(document.body, SKIN_OBS); }
+function refRelinkSoon(){ const S = refLinkState(); clearTimeout(S.timer); S.timer = setTimeout(() => refLoad().then(refLinkRun).catch(e => console.warn('glossary links:', e)), 30); }
+new MutationObserver(refRelinkSoon).observe($('tab-reeling'), { attributes: true, attributeFilter: ['data-mode'] });
+// the definition card a lesson link opens
+const glPop = { from: null };
+function glPopOpen(a){ const g = refState().byId[a.dataset.g]; if (!g) return; const P = $('gl-pop'); glPop.from = a;
+  $('gl-pop-t').textContent = g.term; P.querySelector('.gl-pop-d').innerHTML = refLinks(g.def); P.querySelector('.gl-pop-go').href = '#glossary/' + g.id; P.hidden = false;
+  const r = a.getBoundingClientRect(), w = Math.min(360, innerWidth - 24); P.style.width = w + 'px'; P.style.left = Math.max(12, Math.min(r.left, innerWidth - w - 12)) + 'px';
+  const h = P.offsetHeight, below = r.bottom + 8; P.style.top = (below + h > innerHeight - 8 && r.top - h - 8 > 8 ? r.top - h - 8 : Math.min(below, innerHeight - h - 8)) + 'px';
+  P.querySelector('.gl-pop-x').focus({ preventScroll: true }); }
+function glPopClose(back){ const P = $('gl-pop'); if (P.hidden) return; P.hidden = true; if (back && glPop.from) glPop.from.focus({ preventScroll: true }); }
+document.addEventListener('click', ev => { const a = ev.target.closest && ev.target.closest('a.gl-auto');
+  if (a && ev.button === 0 && !ev.ctrlKey && !ev.metaKey && !ev.shiftKey && !ev.altKey){ ev.preventDefault(); glPopOpen(a); return; }
+  if (!ev.target.closest || !ev.target.closest('#gl-pop')) glPopClose(false); });
+$('gl-pop').querySelector('.gl-pop-x').addEventListener('click', () => glPopClose(true));
+$('gl-pop').addEventListener('click', ev => { if (ev.target.closest('a[href^="#glossary"]')) glPopClose(false); });
+document.addEventListener('keydown', ev => { if (ev.key === 'Escape') glPopClose(true); });
+addEventListener('scroll', ev => { if (!ev.target.closest || !ev.target.closest('#gl-pop')) glPopClose(false); }, true);
+addEventListener('resize', () => glPopClose(false)); addEventListener('hashchange', () => glPopClose(false));
 $('menus').addEventListener('click', ev => { if (ev.target.closest('.tab-btn')) drawer(false); });
 document.addEventListener('click', ev => { if (!$('view-panel').hidden && !ev.target.closest('#view-panel, #view-gear')) viewPanel(false);
   if ($('dock').classList.contains('open') && !ev.target.closest('#dock')) drawer(false); });
@@ -4617,8 +4674,8 @@ function skinGlyph(a){ const g = a.querySelector(':scope > svg.glyph:not(.astro)
 function skinGlyphs(root){ if (root.matches && root.matches('.actor')) skinGlyph(root); if (root.querySelectorAll) root.querySelectorAll('.actor').forEach(skinGlyph); }
 function skinRecords(recs){ for (const r of recs){ if (r.type === 'characterData') skinNode(r.target); else if (r.type === 'attributes'){ if (r.target.classList && r.target.classList.contains('actor')) skinGlyph(r.target); }
     else for (const n of r.addedNodes){ if (n.nodeType === 3) skinNode(n); else if (n.nodeType === 1){ skinWalk(n); skinGlyphs(n); } } } }
-function skinClear(){ if (SKIN.mo) SKIN.mo.disconnect(); for (const [n, rec] of SKIN.nodes) if (n.data === rec.out) n.data = rec.orig; SKIN.nodes.clear(); for (const [el, html] of SKIN.statics) el.innerHTML = html; SKIN.statics.clear(); }
-function skinApply(){ skinClear(); skinWalk(document.body); skinStatics(); skinGlyphs(document.body); SKIN.mo.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['class'] }); }
+function skinClear(){ if (SKIN.mo) SKIN.mo.disconnect(); refUnlink(); for (const [n, rec] of SKIN.nodes) if (n.data === rec.out) n.data = rec.orig; SKIN.nodes.clear(); for (const [el, html] of SKIN.statics) el.innerHTML = html; SKIN.statics.clear(); }
+function skinApply(){ skinClear(); skinWalk(document.body); skinStatics(); skinGlyphs(document.body); SKIN.mo.observe(document.body, SKIN_OBS); refRelinkSoon(); }
 function skinLoad(){ if (!SKIN.ready) SKIN.ready = import('./vendor/astro/index.js').then(m => m.default()).catch(e => { console.warn('skin: the dictionary did not load', e); return { tabs: {}, global: { exact: {}, patterns: [], names: [] }, statics: [], actors: {}, loaded: 0, files: 0 }; })
     .then(d => { SKIN.dict = d; SKIN.mo = new MutationObserver(skinRecords); console.log(`skin: ${d.loaded}/${d.files} dictionaries, ${d.statics.length} statics`); }); return SKIN.ready; }
 async function skinSet(on, remember = true){ on = !!on; document.body.classList.toggle('astro', on); $('skin-switch').setAttribute('aria-checked', String(!on));
@@ -4626,7 +4683,7 @@ async function skinSet(on, remember = true){ on = !!on; document.body.classList.
   if (on){
     document.title = (window.__SITE && window.__SITE.title) || 'PQC Wonderland'; await skinLoad(); if (!document.body.classList.contains('astro')) return;   // switched back while loading
     SKIN.on = true; skinApply(); }
-  else { SKIN.on = false; skinClear(); document.title = SKIN.title; }
+  else { SKIN.on = false; skinClear(); document.title = SKIN.title; refRelinkSoon(); }
   document.body.classList.add('astro-ready'); skinSyncLevel(); viewSync(); }
 function skinSyncLevel(){ const lvl = skinLevel(); document.body.dataset.depth = lvl; document.querySelectorAll('#skin-level button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.level === lvl))); }
 document.querySelectorAll('#skin-level button').forEach(b => b.addEventListener('click', () => setRwMode(b.dataset.level)));
