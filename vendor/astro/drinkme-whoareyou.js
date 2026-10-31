@@ -19,7 +19,7 @@ export default {
         '#tab-drinkme .sizes > p': {
           b: 'The message is a few bytes. Almost everything sent is the KEM ciphertext. Drawn to scale, in bytes:',
           a: 'The message is a few bytes. Almost everything on the wire is the KEM ciphertext ct; the wrapped CEK adds 40 bytes, the nonce 12 and the GCM tag 16. Drawn to scale, in bytes:',
-          x: 'The message is a few bytes. Almost everything on the wire is the KEM ciphertext ct: 768, 1088 or 1568 bytes for ML-KEM-512/768/1024 (FIPS 203 Table 3), the modulus size for RSA-OAEP, the ephemeral public key for DHKEM. The wrapped CEK adds 40 bytes (32 + the 8-byte AES-KW check), the nonce 12 and the GCM tag 16. Drawn to scale, in bytes:',
+          x: 'The message is a few bytes. Almost everything on the wire is the KEM ciphertext ct: 768, 1088 or 1568 bytes for ML-KEM-512/768/1024 (FIPS 203 Table 3), 4433, 8978 or 14421 bytes for HQC-KEM-1/3/5, the modulus size for RSA-OAEP, the ephemeral public key for DHKEM. The wrapped CEK adds 40 bytes (32 + the 8-byte AES-KW check), the nonce 12 and the GCM tag 16. Drawn to scale, in bytes:',
         },
       },
       exact: {

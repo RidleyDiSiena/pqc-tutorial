@@ -839,7 +839,7 @@ body[data-site]:not(.dockrow):not(.rail) .deck{grid-template-columns:repeat(3,mi
 
   <div class="controls">
     <label for="dm-param">Alice's key
-      <select id="dm-param"><optgroup label="post-quantum, FIPS 203"><option value="mlkem512">ML-KEM-512 (level 1)</option><option value="mlkem768" selected>ML-KEM-768 (level 3)</option><option value="mlkem1024">ML-KEM-1024 (level 5)</option></optgroup>
+      <select id="dm-param"><optgroup label="post-quantum, FIPS 203"><option value="mlkem512">ML-KEM-512 (level 1)</option><option value="mlkem768" selected>ML-KEM-768 (level 3)</option><option value="mlkem1024">ML-KEM-1024 (level 5)</option></optgroup> <optgroup label="post-quantum, code-based (FIPS 207 to come)"><option value="hqc1">HQC-KEM-1 (level 1)</option><option value="hqc3">HQC-KEM-3 (level 3)</option><option value="hqc5">HQC-KEM-5 (level 5)</option></optgroup>
         <optgroup label="classical: RSA key transport"><option value="rsaoaep2048">RSA-OAEP-2048</option><option value="rsaoaep3072">RSA-OAEP-3072</option><option value="rsaoaep4096">RSA-OAEP-4096</option></optgroup>
         <optgroup label="classical: ECDH as a KEM (RFC 9180)"><option value="dhkem_x25519">DHKEM(X25519)</option><option value="dhkem_secp256r1">DHKEM(P-256)</option><option value="dhkem_secp384r1">DHKEM(P-384)</option><option value="dhkem_secp521r1">DHKEM(P-521)</option></optgroup></select>
     </label>
@@ -2018,6 +2018,7 @@ const KEM_TABLE = {}; for (const e of [mlkemEntry('512'), mlkemEntry('768'), mlk
 const kemRand = K => K.kind === 'dhkem' ? ecdhKeygen(K.curve).priv : crypto.getRandomValues(new Uint8Array(K.randLen));   // a DHKEM's randomness is an ephemeral scalar, drawn in the curve's range
 // what Encaps and Decaps are, in a line, per kind
 const KEM_WORDS = { 'ml-kem': { encaps: 'Encaps enciphers a random 32-byte m under ek into ct, and hashes the secret out of m; the riddle is m, the answer is K.', decaps: 'Decaps decrypts, re-encrypts and compares; a wrong key or a nudged ciphertext gives a pseudorandom K′ instead of an error (implicit rejection, FIPS 203 §7.3).', wrong: 'Decaps does not error. It hands back a confident, wrong answer: implicit rejection.' },
+  hqc: { encaps: 'HQC Encaps: a random m is Reed–Solomon and Reed–Muller encoded, hidden under deliberate noise with ek, and K is hashed from m and a 16-byte salt; the noise is the riddle, the codeword the answer.', decaps: 'Decaps decodes the noise away to recover m, re-encrypts and compares; a wrong key or a nudged ciphertext gives a pseudorandom K′ instead of an error (implicit rejection, as in ML-KEM).', wrong: 'Decaps does not error. It hands back a confident, wrong answer: implicit rejection, as in ML-KEM.' },
   rsa: { encaps: 'Key transport as a KEM: the sender picks the 32-byte K itself and encrypts it under the modulus with RSA-OAEP(SHA-256); the ciphertext is one number the size of the modulus.', decaps: 'Decryption undoes the private exponent and checks the OAEP padding; the K that comes out is the one the sender chose.', wrong: 'RSA-OAEP fails loudly: the padding check rejects a ciphertext made for another key. There is no implicit rejection, so the impostor can only invent a K′.' },
   dhkem: { encaps: 'DHKEM: a fresh ephemeral key pair; the ciphertext is its public value, and the secret is LabeledExpand(LabeledExtract("eae_prk", DH), "shared_secret", enc ‖ pkR) (RFC 9180 §4.1).', decaps: 'DH between the recipient\'s scalar and the ephemeral public value, then the same LabeledExtract / LabeledExpand.', wrong: 'Diffie-Hellman never errors either: a wrong scalar gives a wrong but well-formed secret, exactly like implicit rejection.' } };
 
@@ -2153,10 +2154,10 @@ function dmScenes(){
   return [
     async () => { dm.spotlight('alice'); dm.caption('Alice makes a key before she is thirsty.', 'ek is public; dk stays in her pinafore pocket.');
       S.alice = await K.keygen(); dm.holds('alice', `${pn}\nek ${S.alice.publicKey.length} B · dk ${S.alice.secretKey.length} B`);
-      dm.add('alice','Alice',`${pn} KeyGen`,`${K.std}. The ${K.kind === 'ml-kem' ? 'encapsulation key' : 'public key'} is what everyone else needs to seal a bottle for her.${K.pq ? '' : ' A classical key: a bottle sealed to it today can be opened by a quantum computer that recovers dk from ek later.'}`,[['ek',S.alice.publicKey],['dk',S.alice.secretKey]]); },
+      dm.add('alice','Alice',`${pn} KeyGen`,`${K.std}. The ${K.kind === 'ml-kem' || K.kind === 'hqc' ? 'encapsulation key' : 'public key'} is what everyone else needs to seal a bottle for her.${K.pq ? '' : ' A classical key: a bottle sealed to it today can be opened by a quantum computer that recovers dk from ek later.'}`,[['ek',S.alice.publicKey],['dk',S.alice.secretKey]]); },
     async () => { dm.spotlight('alice'); await dm.courier('alice','cook','ek (recipe card)'); dm.caption('She leaves her recipe card in the kitchen.', 'Publishing ek costs nothing. The Cat copies it too; that is fine.');
       dm.holds('cook', `Alice's ek ${S.alice.publicKey.length} B`); dm.holds('cat', `Alice's ek (copied)`);
-      dm.add('alice','Alice','Publishes ek',`In real life this rides in an X.509 certificate with ${K.kind === 'ml-kem' ? 'an ML-KEM' : K.kind === 'rsa' ? 'an rsaEncryption' : K.curve === 'x25519' ? 'an id-X25519' : 'an id-ecPublicKey'} SubjectPublicKeyInfo.`,[['ek',S.alice.publicKey]]); },
+      dm.add('alice','Alice','Publishes ek',K.kind === 'hqc' ? 'HQC has no X.509 algorithm identifier yet (FIPS 207 is not drafted), so for now ek travels however the two sides agree; once standardised it will ride in a certificate like ML-KEM\'s.' : `In real life this rides in an X.509 certificate with ${K.kind === 'ml-kem' ? 'an ML-KEM' : K.kind === 'rsa' ? 'an rsaEncryption' : K.curve === 'x25519' ? 'an id-X25519' : 'an id-ecPublicKey'} SubjectPublicKeyInfo.`,[['ek',S.alice.publicKey]]); },
     async () => { dm.spotlight('cook'); S.msg = enc.encode(msgText); S.cekKey = await crypto.subtle.generateKey({name:'AES-GCM', length:256}, true, ['encrypt','decrypt']); S.cek = new Uint8Array(await crypto.subtle.exportKey('raw', S.cekKey));
       dm.caption(`The Cook writes “${escHtml(msgText)}” on a label and picks a key for the smallest bottle.`, 'The content-encryption key (CEK) is random and used once.');
       dm.holds('cook', `message ${S.msg.length} B\nCEK 32 B`);
@@ -2976,6 +2977,13 @@ function hqcDecaps(p, dk, c){ const ek = dk.slice(0, p.ek), dkPke = dk.slice(p.e
   const d = hrDecrypt(p, dkPke, u, v), hek = hqcHash.H(ek), kt = hqcHash.G(hek, d.m, salt), re = hrEncrypt(p, ek, d.m, kt.slice(32, 64)), same = eq(hqcCt(p, re.u, re.v, salt), c);
   return { K: same ? kt.slice(0, 32) : hqcHash.J(hek, sigma, c), same, d }; }
 function hqcKat(p, seed){ const rng = shakeStream(cat(seed, new Uint8Array([0]))), { ek, dk } = hrKeygen(p, rng(32)), m = rng(p.k), salt = rng(16), { K, c } = hqcEncaps(p, ek, m, salt); return { pk: ek, sk: dk, ct: c, ss: K, ssDec: hqcDecaps(p, dk, c).K }; }
+// HQC-KEM as KEM_TABLE entries, so the Drink Me picker can seal a bottle with it: the code above with fresh randomness
+function hqcEntry(name){ const p = HQC_SETS[name], lvl = name.slice(-1);
+  return { key: 'hqc' + lvl, name: 'HQC-KEM-' + lvl, algorithm: 'HQC-KEM-' + lvl, kind: 'hqc', pq: true, level: +lvl, ek: p.ek, ct: p.ct, ss: 32, dk: p.dk, randLen: p.k, std: 'HQC round 4 (FIPS 207 to come)', rejects: 'implicit',
+    keygen: async () => { const { ek, dk } = hrKeygen(p, crypto.getRandomValues(new Uint8Array(32))); return { publicKey: ek, secretKey: dk }; },
+    encapsulate: async (ek, m) => { const { K, c } = hqcEncaps(p, ek, m || crypto.getRandomValues(new Uint8Array(p.k)), crypto.getRandomValues(new Uint8Array(16))); return { cipherText: c, sharedSecret: K }; },
+    decapsulate: async (ct, sk) => hqcDecaps(p, sk, ct).K }; }
+for (const name of Object.keys(HQC_SETS)){ const e = hqcEntry(name); KEM_TABLE[e.key] = e; }
 const hqcKatRow = (p, r) => { const g = hqcKat(p, unhex(r.seed)); return hex(PQ.sha256(g.pk)) === r.pk && hex(PQ.sha256(g.sk)) === r.sk && hex(PQ.sha256(g.ct)) === r.ct && hex(g.ss) === r.ss && eq(g.ss, g.ssDec); };
 function l12katCheck(){ const name = $('rw12-set').value, p = HQC_SETS[name], t0 = performance.now(), rows = HQC_KAT[name].slice(0, 3).map((r, i) => ({ i, ok: hqcKatRow(p, r) }));
   rw.l12kat = { name, ok: rows.every(r => r.ok), ref: rows.every(r => r.ok) }; const say = rs => rs.map(r => `count ${r.i} ${r.ok ? '<b>identical</b>' : '<i>DIFFERENT</i>'}`).join(', ');
