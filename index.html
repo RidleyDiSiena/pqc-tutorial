@@ -712,7 +712,7 @@ body[data-site]:not(.dockrow):not(.rail) .deck{grid-template-columns:repeat(3,mi
 <div class="wrap">
 <script>window.__SITE = {"site": "all", "title": "PQC Wonderland", "label": "", "urls": {}}; document.body.dataset.site = "all";</script>
 <script>(function(){ var astro = true; try { astro = localStorage.getItem('rabbit-hole-skin') !== 'wonder'; } catch (e) {} if (astro) document.body.classList.add('astro');
-  try { var t = localStorage.getItem('rabbit-hole-theme'); if (t === 'light') t = 'paper'; if (t === 'dark') t = 'terminal'; if (/^(terminal|nebula|phosphor|glacier|paper|dawn)$/.test(t || '')){ document.body.dataset.theme = t; if (t === 'paper' || t === 'dawn') document.body.classList.add('light'); } } catch (e) {}
+  try { var t = localStorage.getItem('rabbit-hole-theme'); if (t === 'light') t = 'dawn'; if (t === 'dark') t = 'terminal'; if (/^(terminal|nebula|phosphor|glacier|paper|dawn)$/.test(t || '')){ document.body.dataset.theme = t; if (t === 'paper' || t === 'dawn') document.body.classList.add('light'); } } catch (e) {}
   setTimeout(function(){ document.body.classList.add('astro-ready'); }, 2500); })();</script>
 <header>
   <div>
@@ -4559,9 +4559,11 @@ new MutationObserver(() => viewSync()).observe($('tab-reeling'), { attributes: t
 // the gear and stored as rabbit-hole-theme; the bar's ☾/☀ flips between the last dark and the last light one (rabbit-hole-theme-dark,
 // -light). Old values: 'light' was the first light theme (now paper), 'dark' the terminal.
 const THEMES = { terminal: 'dark', nebula: 'dark', phosphor: 'dark', glacier: 'dark', paper: 'light', dawn: 'light' }, THEME_KEY = 'rabbit-hole-theme';
-const THEME = { pick: 'terminal', dark: 'terminal', light: 'paper' };
-try { let t = localStorage.getItem(THEME_KEY); if (t === 'light') t = 'paper'; if (THEMES[t]) THEME.pick = t; const d = localStorage.getItem(THEME_KEY + '-dark'), l = localStorage.getItem(THEME_KEY + '-light');
-  if (THEMES[d] === 'dark') THEME.dark = d; if (THEMES[l] === 'light') THEME.light = l; THEME[THEMES[THEME.pick]] = THEME.pick; } catch (e) {}
+const THEME = { pick: 'terminal', dark: 'terminal', light: 'dawn' };   // the light/dark switch's light side is Dawn (Ridley, 2026-10-31)
+try { let t = localStorage.getItem(THEME_KEY); if (t === 'light') t = 'dawn'; if (THEMES[t]) THEME.pick = t; const d = localStorage.getItem(THEME_KEY + '-dark'), l = localStorage.getItem(THEME_KEY + '-light');
+  // once: the switch used to save Paper as everyone's light side; move that to Dawn unless Paper is what is on screen now (a real pick)
+  let lt = l; if (!localStorage.getItem(THEME_KEY + '-v2')){ if (lt === 'paper' && THEME.pick !== 'paper'){ lt = 'dawn'; localStorage.setItem(THEME_KEY + '-light', 'dawn'); } localStorage.setItem(THEME_KEY + '-v2', '1'); }
+  if (THEMES[d] === 'dark') THEME.dark = d; if (THEMES[lt] === 'light') THEME.light = lt; THEME[THEMES[THEME.pick]] = THEME.pick; } catch (e) {}
 function themeSync(){ const b = document.body, light = THEMES[THEME.pick] === 'light'; b.dataset.theme = THEME.pick; b.classList.toggle('light', light);
   const t = $('theme-btn'); if (t){ t.textContent = light ? '☀ Light' : '☾ Dark'; t.setAttribute('aria-pressed', String(light)); t.title = light ? `Light (${THEME.light}); click for ${THEME.dark}` : `Dark (${THEME.dark}); click for ${THEME.light}`; }
   document.querySelectorAll('.vp-th').forEach(o => o.setAttribute('aria-checked', String(o.dataset.theme === THEME.pick))); }
