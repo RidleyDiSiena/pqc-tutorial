@@ -13,6 +13,10 @@ A post-quantum cryptography tutorial and classroom that runs entirely in the bro
 - **The Reference:** a searchable, cross-linked glossary of every term the Tutorial and the Classroom use, and a card for
   each algorithm (FIPS 203 to 207, SP 800-208, X-Wing, FrodoKEM, Classic McEliece) explaining what it is, the mathematics
   under it, its sizes, and the official references. Any entry can be linked, for example `#glossary/lwe`.
+- **Crypto 4 Kids:** the same ideas told for children, in eight short pages with a game each: a Caesar decoder wheel, the
+  magic padlock (ML-KEM), the wobbly number game (LWE), the super stamp (ML-DSA), the fingerprint machine (hashes and
+  SLH-DSA), the noisy message (HQC's error correction), two locks on one door (X-Wing hybrids), and a quiz that ends in a
+  secret-agent badge. Finished games earn stickers. The padlock and the stamp run the real ML-KEM-768 and ML-DSA-44.
 
 It is a static site: `index.html`, `credits.html` and `vendor/`. There is no server code, no build step and no analytics, and
 the page loads nothing from any other site.

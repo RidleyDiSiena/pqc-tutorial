@@ -419,6 +419,109 @@ body.phone-land .db-btn{min-height:38px}
 body.phone-land .menus{left:auto;right:0;width:min(420px,70vw);max-height:calc(100dvh - var(--dock-h,44px));border-left:1px solid var(--line)}
 body.phone-land .view-panel{left:auto;width:min(460px,70vw);max-height:calc(100dvh - var(--dock-h,44px) - 8px);border-radius:18px 0 0 0}
 @media (max-width:640px){.tabs.tutorial{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs.reference{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Crypto 4 Kids: big type, round corners, the theme's warm colours */
+body[data-sec="kids"]{--sec:var(--tangerine);--sec-2:var(--pink)}
+body.astro .deck-btn[data-sec="kids"]{--c:var(--tangerine) !important} body.astro[data-sec="kids"]{--sec:var(--tangerine);--sec-2:var(--pink)}
+.tabs.kids{grid-template-columns:repeat(8,minmax(0,1fr))} .tabs.kids .tab-btn{padding:9px 10px 8px;border-radius:16px 16px 6px 6px} .tabs.kids .tab-btn .fun{font-size:14px}
+@media (max-width:900px){.tabs.kids{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:640px){.tabs.kids{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kid-stickers{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:8px 0 2px}
+.ks-lbl{font-size:13px;color:var(--muted);margin-right:4px} .ks-lbl b{color:var(--ink)}
+.ks{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;border:2px dashed var(--line);font-size:18px;color:var(--faint);background:var(--panel)}
+.ks.on{border:2px solid var(--tangerine);background:color-mix(in srgb,var(--tangerine) 16%,var(--panel));animation:kpop .5s ease-out}
+@keyframes kpop{0%{transform:scale(.4)}70%{transform:scale(1.2)}100%{transform:scale(1)}}
+.tab.kids{font-size:17px;max-width:900px}
+.tab.kids h2{font-family:"Righteous",sans-serif;font-size:clamp(26px,3.6vw,38px);color:var(--tangerine);margin-bottom:12px}
+.kid-h{font-family:"Righteous",sans-serif;font-size:21px;color:var(--pink);margin:22px 0 6px}
+.kid-p{line-height:1.65;margin:10px 0;max-width:68ch}
+.kid-big{display:flex;gap:14px;align-items:center;background:color-mix(in srgb,var(--tangerine) 13%,var(--panel));border:2px solid color-mix(in srgb,var(--tangerine) 55%,transparent);border-radius:22px;padding:14px 18px;margin:6px 0 14px}
+.kid-big p{margin:0;line-height:1.6;font-size:18px} .kid-big-e{font-size:44px;line-height:1;flex:0 0 auto}
+.kid-why{background:color-mix(in srgb,var(--violet) 10%,var(--panel));border-radius:16px;padding:10px 14px}
+.kid-cast{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:700px){.kid-cast{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kid-who{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:12px 8px;font-size:14.5px;line-height:1.35}
+.kid-who b{font-size:16px} .kid-who span:last-child{color:var(--muted)} .kid-who-e{font-size:40px;line-height:1.1}
+.kid-try{border:3px dashed color-mix(in srgb,var(--cyan) 60%,transparent);border-radius:24px;padding:14px 18px 16px;margin:18px 0;background:color-mix(in srgb,var(--cyan) 6%,var(--panel));position:relative;overflow:hidden}
+.kid-try h3{font-family:"Righteous",sans-serif;font-size:21px;color:var(--cyan);margin:0 0 8px}
+.kid-try p{margin:8px 0;line-height:1.55}
+.kid-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:10px 0}
+.kid-row label{display:inline-flex;align-items:center;flex-wrap:wrap;gap:6px 8px}
+.kid-block{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+.kid-in{font:inherit;font-size:17px;padding:8px 12px;border-radius:14px;border:2px solid var(--line);background:var(--ground);color:var(--ink);min-width:0;max-width:100%}
+input.kid-in:not(.kid-small){width:min(420px,100%)} textarea.kid-in{width:100%;resize:vertical}
+.kid-in:focus{outline:3px solid var(--tangerine);outline-offset:1px}
+.kid-in.flash{animation:kflash 1s ease-out} @keyframes kflash{0%{background:color-mix(in srgb,var(--hotred) 35%,var(--ground))}100%{background:var(--ground)}}
+.kid-small{width:4.2em;text-align:center}
+.kid-btn{font:600 16px/1.2 "Exo 2",sans-serif;padding:10px 18px;border-radius:999px;border:0;background:var(--tangerine);color:var(--black);cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 3px 0 color-mix(in srgb,var(--tangerine) 50%,#000);transition:transform .1s}
+.kid-btn:hover:not(:disabled){transform:translateY(-1px)} .kid-btn:active:not(:disabled){transform:translateY(2px);box-shadow:none}
+.kid-btn:disabled{opacity:.4;cursor:default} .kid-btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.kid-btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--line)}
+.kid-num{font:600 18px "Share Tech Mono",monospace;color:var(--tangerine);min-width:2ch;display:inline-block}
+.kid-code{font:600 19px/1.4 "Share Tech Mono",monospace;letter-spacing:.12em;color:var(--green);word-break:break-word}
+.kid-big-code{font-size:22px;margin:6px 0}
+.kid-out{font-size:17px}
+.kid-wheel{display:flex;flex-wrap:wrap;gap:3px;margin:8px 0}
+.kid-wheel span{display:flex;flex-direction:column;align-items:center;width:26px;padding:2px 0;border-radius:8px;background:var(--ground);font:14px/1.2 "Share Tech Mono",monospace;color:var(--green)}
+.kid-wheel b{color:var(--muted);font-weight:400;border-bottom:1px solid var(--line);width:100%;text-align:center}
+.kid-challenge{background:var(--panel);border-radius:18px;padding:10px 14px;margin-top:12px}
+.kid-say{min-height:1.5em;font-size:17px;line-height:1.5}
+.kid-note,.kid-hint{color:var(--muted);font-size:15px}
+.kid-fact{background:color-mix(in srgb,var(--lime) 11%,var(--panel));border-radius:16px;padding:10px 14px;line-height:1.55;margin:16px 0}
+.kid-grown{font-size:15px;color:var(--muted);border-top:2px dotted var(--line);padding-top:10px;margin-top:18px;line-height:1.6}
+.kid-grown b{color:var(--ink)} .kid-grown a{margin-right:10px;color:var(--cyan);white-space:nowrap}
+.kid-next{margin:18px 0 28px}
+.kid-stage{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px;background:var(--ground);border-radius:20px;padding:16px 12px;margin:8px 0}
+.kid-actor{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:78px;text-align:center}
+.kid-actor-e{font-size:46px;line-height:1.1} .kid-hold{min-height:1.6em;font-size:20px}
+.kid-lane{position:relative;display:flex;justify-content:center;align-items:flex-end;min-height:120px;border-bottom:3px dotted var(--line)}
+.kid-eve .kid-hold{font-size:15px;font-weight:600;color:var(--hotred)}
+.kid-eve.shake{animation:kshake .5s}
+@keyframes kshake{0%,100%{transform:none}20%,60%{transform:translateX(-6px) rotate(-4deg)}40%,80%{transform:translateX(6px) rotate(4deg)}}
+.kid-parcel{position:absolute;top:4px;font-size:30px;transition:left .8s ease-in-out;transform:translateX(-50%);left:50%}
+.kid-parcel.at-a{left:6%} .kid-parcel.at-b{left:94%} .kid-parcel.at-e{left:50%}
+.kid-cap{font-size:17px;min-height:3em;line-height:1.5}
+.kid-real p{margin:8px 0}
+.kid-hex{display:inline-flex;flex-wrap:wrap;gap:2px;vertical-align:middle;max-width:100%}
+.kid-hex i{width:12px;height:16px;border-radius:3px;background:hsl(var(--h) 70% 58%)}
+.kid-verdict{font-size:18px;font-weight:600;min-height:1.5em;border-radius:14px}
+.kid-verdict.ok{color:var(--green)} .kid-verdict.bad{color:var(--hotred)}
+.kid-modes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.kid-mode{font:inherit;font-size:15px;padding:7px 14px;border-radius:999px;border:2px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.kid-mode[aria-pressed="true"]{border-color:var(--tangerine);background:color-mix(in srgb,var(--tangerine) 18%,var(--panel))}
+.kid-clues{list-style:none;padding:0;margin:8px 0;display:grid;gap:6px}
+.kid-clues li{font:20px/1.4 "Share Tech Mono",monospace;background:var(--ground);border-radius:12px;padding:6px 12px}
+.kid-wob{color:var(--pink)}
+.kid-print{display:inline-flex;gap:3px;font-size:24px;vertical-align:middle;background:var(--ground);border-radius:12px;padding:2px 8px;min-height:1.6em}
+.kid-target{font-size:28px;vertical-align:middle} .kid-tries{color:var(--muted);font-size:14px}
+.kid-triples{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.kid-tri{display:flex;flex-wrap:wrap;justify-content:center;gap:0 4px;width:84px;background:var(--ground);border-radius:12px;padding:6px 8px;font:20px/1.2 "Share Tech Mono",monospace}
+.kid-tri span{color:var(--green)} .kid-tri span.bad,.kid-bad{color:var(--hotred);font-weight:600}
+.kid-tri b{flex-basis:100%;text-align:center;border-top:2px solid var(--line);margin-top:4px;padding-top:2px;font-size:24px} .kid-tri b.ok{color:var(--green)} .kid-tri b.bad{color:var(--hotred)}
+.kid-door{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;background:var(--ground);border-radius:20px;padding:16px;margin:8px 0}
+.kid-lock{display:flex;flex-direction:column;align-items:center;text-align:center;font-size:14px;gap:2px;padding:10px;border-radius:16px;border:2px solid var(--green);transition:border-color .3s}
+.kid-lock span:last-child{color:var(--muted)} .kid-lock-e{font-size:40px;line-height:1.1} .kid-lock.open{border-color:var(--hotred)}
+.kid-treasure{display:flex;flex-direction:column;align-items:center;font-size:16px;font-weight:600;color:var(--green)} .kid-treasure span:first-child{font-size:54px;line-height:1.1}
+.kid-treasure.lost{color:var(--hotred)}
+.kid-quiz{margin:10px 0 30px}
+.kid-qn{color:var(--muted);font-size:15px} .kid-stars{letter-spacing:2px}
+.kid-q{font-family:"Righteous",sans-serif;font-size:23px;margin:6px 0 12px;line-height:1.3}
+.kid-opts{display:grid;gap:10px;max-width:560px}
+.kid-opt{font:inherit;font-size:17px;text-align:left;padding:12px 16px;border-radius:16px;border:2px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.kid-opt:hover:not(:disabled){border-color:var(--tangerine)} .kid-opt:disabled{cursor:default}
+.kid-opt.ok{border-color:var(--green);background:color-mix(in srgb,var(--green) 16%,var(--panel))} .kid-opt.bad{border-color:var(--hotred);background:color-mix(in srgb,var(--hotred) 14%,var(--panel))}
+.kid-say .kid-btn{margin-left:8px;vertical-align:middle}
+.kid-badge{position:relative;overflow:hidden;max-width:420px;text-align:center;border-radius:28px;padding:18px 20px;margin:12px 0;border:4px double var(--tangerine);background:radial-gradient(circle at 50% 0,color-mix(in srgb,var(--tangerine) 22%,var(--panel)),var(--panel))}
+.kid-badge h3{font-family:"Righteous",sans-serif;font-size:24px;color:var(--tangerine);margin:0}
+.kid-badge-e{font-size:56px;line-height:1} .kid-badge-t{margin:4px 0 0;font:13px "Share Tech Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.kid-badge-n{font-size:22px;font-weight:600;margin:8px 0 4px} .kid-badge-s{font-size:14px;color:var(--muted);margin:0}
+.kid-toast{position:fixed;left:50%;bottom:calc(var(--dock-h,0px) + 18px);transform:translate(-50%,40px);opacity:0;z-index:60;pointer-events:none;background:var(--panel-2);color:var(--ink);border:2px solid var(--tangerine);border-radius:999px;padding:10px 20px;font-size:17px;box-shadow:var(--shadow);transition:opacity .3s,transform .3s}
+.kid-toast.show{opacity:1;transform:translate(-50%,0)}
+.kid-confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.kid-confetti i{position:absolute;top:-12px;left:var(--x);width:8px;height:12px;border-radius:2px;background:hsl(var(--h) 85% 60%);animation:kfall var(--d) ease-in forwards;transform:rotate(var(--r))}
+@keyframes kfall{to{top:110%;transform:rotate(calc(var(--r) + 540deg))}}
+@media (prefers-reduced-motion:reduce){.ks.on,.kid-eve.shake,.kid-in.flash{animation:none} .kid-parcel,.kid-toast{transition:none}}
+body.phone .kid-stage{grid-template-columns:auto minmax(0,1fr) auto;padding:10px 6px} body.phone .kid-actor{min-width:56px} body.phone .kid-actor-e{font-size:36px}
+body.phone .kid-big{padding:12px} body.phone .kid-big-e{font-size:34px} body.phone .kid-try{padding:12px}
 /* sizes wall */
 .wall{display:grid;gap:14px;margin-top:18px}
 .wall .sizes{margin-top:0}
@@ -747,7 +850,8 @@ body.docked .lbody.spread{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} bod
 .db-theme{display:none} body.astro .db-theme{display:inline-flex}
 /* one page, two sections: the deck switches between them in place */
 .deck-btn.site-only{display:none!important} body[data-site] .deck-btn.site-only{display:grid!important} body[data-site]:is(.dockrow,.rail) .deck-btn.site-only{display:block!important}
-body[data-site]:not(.dockrow):not(.rail) .deck{grid-template-columns:repeat(3,minmax(0,1fr))}
+body[data-site]:not(.dockrow):not(.rail) .deck{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){body[data-site]:not(.dockrow):not(.rail) .deck{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 
 <div class="wrap">
@@ -762,7 +866,7 @@ body[data-site]:not(.dockrow):not(.rail) .deck{grid-template-columns:repeat(3,mi
       <span class="h1-astro"><svg class="worm" viewBox="0 0 1404 100" role="img" aria-label="PQC Wonderland" preserveAspectRatio="xMinYMid meet"><g fill="none" stroke="currentColor" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"><path transform="translate(0 0)" d="M11 89V11h31a22 22 0 0 1 0 44H11"/><path transform="translate(90 0)" d="M50 11a39 39 0 1 0 .1 0M60 60l26 26"/><path transform="translate(206 0)" d="M86 23A39 39 0 1 0 86 77"/><path transform="translate(368 0)" d="M11 11v56a22 22 0 0 0 44 0V37M55 37v30a22 22 0 0 0 44 0V11"/><path transform="translate(496 0)" d="M50 11a39 39 0 1 0 .1 0"/><path transform="translate(612 0)" d="M11 89V11h22a22 22 0 0 1 22 22v56"/><path transform="translate(706 0)" d="M11 89V11h25a39 39 0 0 1 0 78H11"/><path transform="translate(808 0)" d="M73 11H33a22 22 0 0 0-22 22v34a22 22 0 0 0 22 22h40M11 50h54"/><path transform="translate(908 0)" d="M11 89V11h31a22 22 0 0 1 0 44H11M44 55l31 34"/><path transform="translate(1010 0)" d="M11 11v56a22 22 0 0 0 22 22h40"/><path transform="translate(1108 0)" d="M11 89V50a39 39 0 0 1 78 0v39"/><path transform="translate(1224 0)" d="M11 89V11h22a22 22 0 0 1 22 22v56"/><path transform="translate(1318 0)" d="M11 89V11h25a39 39 0 0 1 0 78H11"/></g></svg></span>
     </h1>
   </div>
-  <p>Three doors at the bottom of the hole: the algorithms, the mathematics under them, and a reference shelf for every word and standard.</p>
+  <p>Four doors at the bottom of the hole: the algorithms, the mathematics under them, a reference shelf for every word and standard, and a little door for kids.</p>
   <div class="skinbar" id="skinbar">
     <div class="skinlevel" id="skin-level" role="group" aria-label="Depth"><span class="lbl">Depth</span><button type="button" data-level="b" aria-pressed="false">Simple</button><button type="button" data-level="a" aria-pressed="true">Advanced</button><button type="button" data-level="x" aria-pressed="false">Expert</button></div>
     <button class="skin-switch" id="skin-switch" type="button" role="switch" aria-checked="false" aria-label="Wonderland skin" title="Astronaut: PQC Wonderland, plain and light. Rabbit: Down the Rabbit Hole, the Wonderland version."><svg class="ico astro" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="8" y="6.5" width="8" height="4.5" rx="2" fill="currentColor"/><path d="M4 22c0-4.4 3.6-7 8-7s8 2.6 8 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="knob"></span><svg class="ico rabbit" viewBox="0 0 64 40" aria-hidden="true"><g fill="currentColor"><ellipse cx="24" cy="27" rx="19" ry="11"/><circle cx="7" cy="30" r="4.5"/><circle cx="46" cy="24" r="10"/><path d="M40 16 30 3q-3-2-3 2l5 14z"/><path d="M46 15 40 1q-2-3-3 1l3 15z"/></g><circle cx="50" cy="22" r="1.8" fill="var(--panel-2)"/></svg></button>
@@ -775,6 +879,7 @@ body[data-site]:not(.dockrow):not(.rail) .deck{grid-template-columns:repeat(3,mi
   <button class="deck-btn" role="tab" data-sec="tutorial" aria-selected="true" style="--c:var(--cyan)"><span class="t">PQC Algorithm Tutorial</span><span class="s">FIPS 203–207 · X-Wing</span></button>
   <button class="deck-btn" role="tab" data-sec="classroom" aria-selected="false" style="--c:var(--green)"><span class="t">PQC Classroom</span><span class="s">thirteen lessons &amp; the exam</span></button>
   <button class="deck-btn" role="tab" data-sec="reference" aria-selected="false" style="--c:var(--violet)"><span class="t">Reference</span><span class="s">glossary &amp; the standards</span></button>
+  <button class="deck-btn" role="tab" data-sec="kids" aria-selected="false" style="--c:var(--tangerine)"><span class="t">Crypto 4 Kids</span><span class="s">secret codes &amp; games</span></button>
 </nav>
 
 <div class="secframe">
@@ -816,6 +921,20 @@ body[data-site]:not(.dockrow):not(.rail) .deck{grid-template-columns:repeat(3,mi
     <nav class="tabs reference" role="tablist" aria-label="Reference">
       <button class="tab-btn" role="tab" data-tab="glossary" aria-selected="false" aria-controls="tab-glossary"><span class="std">Every term, A to Z</span><span class="fun">Glossary</span></button>
       <button class="tab-btn" role="tab" data-tab="algorithms" aria-selected="false" aria-controls="tab-algorithms"><span class="std">Each one and its maths</span><span class="fun">Algorithms</span></button>
+    </nav>
+  </div>
+  <div class="sec" id="sec-kids" hidden>
+    <div class="sec-blurb"><span class="fun">Crypto 4 Kids</span><p>Secret codes, magic padlocks, super stamps and a quantum robot called Q-Bot: the same big ideas as the rest of the page, explained for kids, with games to play and stickers to collect.</p>
+      <div class="kid-stickers" id="kid-stickers" aria-label="Stickers"></div></div>
+    <nav class="tabs kids" role="tablist" aria-label="Crypto 4 Kids">
+      <button class="tab-btn" role="tab" data-tab="k-hello" aria-selected="false" aria-controls="tab-k-hello"><span class="std">Start here</span><span class="fun">Secret Codes!</span></button>
+      <button class="tab-btn" role="tab" data-tab="k-padlock" aria-selected="false" aria-controls="tab-k-padlock"><span class="std">Sharing a secret</span><span class="fun">Magic Padlock</span></button>
+      <button class="tab-btn" role="tab" data-tab="k-wobble" aria-selected="false" aria-controls="tab-k-wobble"><span class="std">The maths puzzle</span><span class="fun">Wobbly Numbers</span></button>
+      <button class="tab-btn" role="tab" data-tab="k-stamp" aria-selected="false" aria-controls="tab-k-stamp"><span class="std">Who wrote it?</span><span class="fun">Super Stamp</span></button>
+      <button class="tab-btn" role="tab" data-tab="k-print" aria-selected="false" aria-controls="tab-k-print"><span class="std">Fingerprints</span><span class="fun">Fingerprint Machine</span></button>
+      <button class="tab-btn" role="tab" data-tab="k-noisy" aria-selected="false" aria-controls="tab-k-noisy"><span class="std">Fixing mistakes</span><span class="fun">Noisy Message</span></button>
+      <button class="tab-btn" role="tab" data-tab="k-twolocks" aria-selected="false" aria-controls="tab-k-twolocks"><span class="std">Extra careful</span><span class="fun">Two Locks</span></button>
+      <button class="tab-btn" role="tab" data-tab="k-quiz" aria-selected="false" aria-controls="tab-k-quiz"><span class="std">Earn a badge</span><span class="fun">Agent Quiz</span></button>
     </nav>
   </div>
 </div>
@@ -1907,6 +2026,16 @@ Lattices, hashes, codes: no Shor.  Best known quantum sieving 2^0.257d against c
   <p class="lede">One card for each algorithm the page covers: what it is for, the mathematics it rests on (each term links to the glossary), its sizes, where to try it here, and the official references.</p>
   <div id="alg-body"><p class="gl-count">Loading the cards…</p></div>
 </section>
+
+<!-- ============================ CRYPTO 4 KIDS (vendor/kids.js, loaded the first time it opens) ============================ -->
+<section class="tab ref kids" id="tab-k-hello" role="tabpanel" hidden><div id="kb-hello"><p class="kid-note">Loading…</p></div></section>
+<section class="tab ref kids" id="tab-k-padlock" role="tabpanel" hidden><div id="kb-padlock"><p class="kid-note">Loading…</p></div></section>
+<section class="tab ref kids" id="tab-k-wobble" role="tabpanel" hidden><div id="kb-wobble"><p class="kid-note">Loading…</p></div></section>
+<section class="tab ref kids" id="tab-k-stamp" role="tabpanel" hidden><div id="kb-stamp"><p class="kid-note">Loading…</p></div></section>
+<section class="tab ref kids" id="tab-k-print" role="tabpanel" hidden><div id="kb-print"><p class="kid-note">Loading…</p></div></section>
+<section class="tab ref kids" id="tab-k-noisy" role="tabpanel" hidden><div id="kb-noisy"><p class="kid-note">Loading…</p></div></section>
+<section class="tab ref kids" id="tab-k-twolocks" role="tabpanel" hidden><div id="kb-twolocks"><p class="kid-note">Loading…</p></div></section>
+<section class="tab ref kids" id="tab-k-quiz" role="tabpanel" hidden><div id="kb-quiz"><p class="kid-note">Loading…</p></div></section>
 
 <p class="foot credit">Created by <strong>Ridley DiSiena</strong> · <a href="https://github.com/RidleyDiSiena">github.com/RidleyDiSiena</a> · <a href="https://ridleydisiena.github.io/spaced-research-ledger/">Spaced Research Ledger</a> · <a href="credits.html">Credits &amp; sources</a></p>
 <p class="foot">Primitives: <a href="https://github.com/paulmillr/noble-post-quantum">noble-post-quantum</a> 0.7.1 (<span id="pqsrc">loading</span>), plus WebCrypto. The bundled libraries and fonts ship with the page: it makes no requests to any other site, and nothing you do here is sent anywhere. Code: MIT. Lessons and text: CC BY 4.0. Sources, credits and licences: <a href="credits.html">credits</a>.</p>
@@ -4364,7 +4493,7 @@ hqDriver.setOnError(e => hq.error('Something went wrong in the pool: ' + e.messa
 // Four sections on the deck; each owns its tabs. The classroom's second rail picks a lesson instead of a tab.
 // The hash stays the tab's name (#teaparty, #drinkme); a lesson rides after a slash (#reeling/3, #reeling/exam), and the
 // classroom's mode before it (#reeling/simple/3; the old word beginner still works); a link without a mode keeps the viewer's, and the hash written back carries it.
-const SECTIONS = { tutorial: ['sizes','drinkme','whoareyou','tumtum','pocketwatch','pooloftears','bothpills','teaparty'], classroom: ['reeling'], reference: ['glossary','algorithms'] };
+const SECTIONS = { tutorial: ['sizes','drinkme','whoareyou','tumtum','pocketwatch','pooloftears','bothpills','teaparty'], classroom: ['reeling'], reference: ['glossary','algorithms'], kids: ['k-hello','k-padlock','k-wobble','k-stamp','k-print','k-noisy','k-twolocks','k-quiz'] };
 const TABS = Object.values(SECTIONS).flat();
 const LESSONS = [...document.querySelectorAll('#tab-reeling details.lesson')].map(d => d.id);
 const lastIn = Object.fromEntries(Object.entries(SECTIONS).map(([k, v]) => [k, v[0]]));
@@ -4398,6 +4527,7 @@ function showTab(hash, push=true){
   if (name === 'reeling') showLesson(sub ? (sub === 'exam' ? 'rw-lx' : 'rw-l' + sub) : lesson);
   const refSub = (name === 'glossary' || name === 'algorithms') && sub && /^[a-z0-9-]+$/.test(sub) ? sub : '';
   if (name === 'glossary' || name === 'algorithms') refShow(name, refSub);
+  if (sec === 'kids') kidsLoad();
   const h = name === 'reeling' ? `reeling/${RW_MODES[rw.mode]}/${lessonKey(lesson)}` : refSub ? `${name}/${refSub}` : name;
   if (push && location.hash !== '#' + h) history.replaceState(null, '', '#' + h);
   try { localStorage.setItem('rabbit-hole-tab', h); } catch (e) {}
@@ -4418,7 +4548,7 @@ const VIEWS = ['dock', 'rail', 'cards', 'hud', 'classic'], VIEW_KEY = 'rabbit-ho
 const SITE = window.__SITE || null;
 const VIEW = { pick: 'rail', fit: true, ready: false, card: 0, cards: [], host: null, raf: 0 };   // Console is the default (Ridley, 2026-10-24)
 try { const v = localStorage.getItem(VIEW_KEY); if (VIEWS.includes(v)) VIEW.pick = v; VIEW.fit = localStorage.getItem(FIT_KEY) !== 'off'; } catch (e) {}
-const viewEff = () => ['tutorial', 'classroom', 'reference'].includes(document.body.dataset.sec) && !document.body.classList.contains('matrix') ? (document.body.classList.contains('phone') ? 'hud' : VIEW.pick) : 'classic';
+const viewEff = () => ['tutorial', 'classroom', 'reference', 'kids'].includes(document.body.dataset.sec) && !document.body.classList.contains('matrix') ? (document.body.classList.contains('phone') ? 'hud' : VIEW.pick) : 'classic';
 const viewSpread = v => v !== 'classic' && innerWidth >= (v === 'rail' ? 1240 : 1100);
 const paneTab = () => document.querySelector('.wrap > .tab:not([hidden])');
 // two columns: the words on the left, the demo, the boards and the bench on the right; every block keeps its order within its
@@ -4446,7 +4576,7 @@ function cardsOf(host){ host.querySelectorAll('.card-off').forEach(e => e.classL
   if (tryEl) cards[cards.length - 1].els.push(tryEl);
   const out = cards.filter(c => c.els.length), nb = out.filter(c => c.board).length; let k = 0;
   out.forEach(c => { if (c.board && nb > 1) c.name = `Board ${++k} of ${nb}`; }); return out; }
-function viewHost(){ if (document.body.dataset.sec === 'reference') return null;   // the reference shelf reads as one page, not flight cards
+function viewHost(){ if (document.body.dataset.sec === 'reference' || document.body.dataset.sec === 'kids') return null;   // the reference shelf and the kids' pages read as one page, not flight cards
   if (document.body.dataset.sec === 'classroom') return $(lesson) && $(lesson).querySelector('.lbody'); return paneTab(); }
 // back to the top of whatever scrolls: the page, the open pane, a lesson's body and its columns
 function viewTop(){ scrollTo(0, 0); const t = paneTab(); if (t){ t.scrollTop = 0; t.querySelectorAll('.lbody, .lcol').forEach(e => { e.scrollTop = 0; }); } }
@@ -4521,6 +4651,8 @@ document.querySelectorAll('.tab-btn[data-lesson]').forEach(o => o.addEventListen
 const extLink = a => { a.target = '_blank'; a.rel = 'noopener noreferrer'; };
 document.querySelectorAll('a[href^="http"]').forEach(extLink);
 document.addEventListener('click', ev => { const a = ev.target.closest && ev.target.closest('a[href^="http"]'); if (a) extLink(a); }, true);
+// ---------- Crypto 4 Kids (vendor/kids.js, loaded the first time the section opens; it gets PQ and the router) ----------
+function kidsLoad(){ return kidsLoad.p || (kidsLoad.p = import('./vendor/kids.js').then(K => K.mount(PQ, h => { showTab(h); viewTop(); })).catch(e => { kidsLoad.p = null; console.warn('kids:', e); })); }
 // ---------- the Reference shelf: the glossary and the algorithm cards (vendor/reference.js, loaded the first time it opens) ----------
 // In the module's texts [[id]] links to a glossary entry and [[id|words]] links with other words; #glossary/<id> and
 // #algorithms/<id> are links anyone can share. "Where you meet it" is found by searching the scenes' and lessons' own text.
